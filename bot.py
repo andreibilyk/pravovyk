@@ -30,11 +30,11 @@ def handle_commands(message):
 def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
- if message.text == "Обрати сферу":
+ if str(message.text) == str("Обрати сферу"):
   repeat_all_messages._steps.clear()
   handle_commands(message)
   return
- elif message.text == "Назад":
+ elif str(message.text) == "Назад":
   if len(repeat_all_messages._steps) >= 2:
    message.text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2]
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-1])
@@ -46,7 +46,7 @@ def repeat_all_messages(message):
  db_worker = SQLighter(config.database_name)
  try:
   row = db_worker.select_row(message.text)
-  print (message.text)
+  log(message.text)
   markup = utils.generate_markup(row[1])
   markup.add("Обрати сферу","Назад")
   repeat_all_messages._steps.append(message.text)
