@@ -22,7 +22,9 @@ def handle_commands(message):
  row = db_worker.select_single(1)
     # Формируем разметку
  markup = utils.generate_markup(row[1])
+ repeat_all_messages._steps = []
  bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
+
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def repeat_all_messages(message):
