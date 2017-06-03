@@ -34,7 +34,7 @@ def repeat_all_messages(message):
   repeat_all_messages._steps.clear()
   handle_commands(message)
   return
- elif message.text == ""Назад":
+ elif message.text == "Назад":
   if len(repeat_all_messages._steps) >= 2:
    message.text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2]
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-1])
