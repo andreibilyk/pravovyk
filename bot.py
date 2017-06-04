@@ -48,6 +48,7 @@ def repeat_all_messages(message):
   markup = utils.generate_markup(row[2])
   markup.add("Обрати сферу","Назад")
   repeat_all_messages._steps.append(message.text)
+  bot.send_message(message.chat.id,str(repeat_all_messages._steps))
   bot.send_message(message.chat.id,row[1],reply_markup=markup)
  except BaseException as e:
   bot.send_message(message.chat.id,str(e)+"Вибачте,інформації ще нема,ми працюємо над цим")
