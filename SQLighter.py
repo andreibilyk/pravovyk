@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import psycopg2
-
+import logging
 class SQLighter:
 
     def __init__(self):
@@ -16,7 +16,7 @@ class SQLighter:
     def select_row(self,answer):
         with self.connection:
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = '+"'"+str(answer)+"'")
-            print (str(self.cursor.fetchall()[0]))
+            log(str(self.cursor.fetchall()[0]))
             return self.cursor.fetchall()[0]
 
 
