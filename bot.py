@@ -18,7 +18,7 @@ bot = telebot.TeleBot(config.token)
 
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
- db_worker = SQLighter(config.database_name)
+ db_worker = SQLighter()
  row = db_worker.select_single(1)
     # Формируем разметку
  markup = utils.generate_markup(row[1])
@@ -43,7 +43,7 @@ def repeat_all_messages(message):
    repeat_all_messages._steps.clear()
    handle_commands(message)
    return
- db_worker = SQLighter(config.database_name)
+ db_worker = SQLighter()
  try:
   row = db_worker.select_row(message.text)
   log(message.text)
