@@ -16,7 +16,6 @@ class SQLighter:
     def select_row(self,answer):
         with self.connection:
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = '+"'"+str(answer)+"'")
-            log(str(self.cursor.fetchall()[0]))
             return self.cursor.fetchall()[0]
 
 
