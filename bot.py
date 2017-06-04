@@ -7,7 +7,6 @@ import logging
 from telebot import types
 from SQLighter import SQLighter
 import utils
-import sqlite3
 
 
 
@@ -50,8 +49,8 @@ def repeat_all_messages(message):
   markup.add("Обрати сферу","Назад")
   repeat_all_messages._steps.append(message.text)
   bot.send_message(message.chat.id,row[1],reply_markup=markup)
- except BaseException:
-  bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим")
+ except BaseException as e:
+  bot.send_message(message.chat.id,str(e)+"Вибачте,інформації ще нема,ми працюємо над цим")
 
 server = Flask(__name__)
 
