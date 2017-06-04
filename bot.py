@@ -14,11 +14,11 @@ import sqlite3
 
 bot = telebot.TeleBot(config.token)
 
-
+db_worker = SQLighter()
 
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
- db_worker = SQLighter()
+
  row = db_worker.select_single(1)
     # Формируем разметку
  markup = utils.generate_markup(row[2])
@@ -44,7 +44,6 @@ def repeat_all_messages(message):
    handle_commands(message)
    return
  try:
-  db_worker = SQLighter()
   row = db_worker.select_row(message.text)
   bot.send_message(message.chat.id,"Successful")
   markup = utils.generate_markup(row[2])
