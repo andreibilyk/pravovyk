@@ -46,7 +46,6 @@ def repeat_all_messages(message):
  db_worker = SQLighter()
  try:
   row = db_worker.select_row(message.text)
-  log(message.text)
   markup = utils.generate_markup(row[2])
   markup.add("Обрати сферу","Назад")
   repeat_all_messages._steps.append(message.text)
