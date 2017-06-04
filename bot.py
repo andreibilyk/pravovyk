@@ -29,11 +29,11 @@ def handle_commands(message):
 def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
- if message.text.encode('utf-8') == "Обрати сферу":
+ if message.text.encode() == "Обрати сферу":
   repeat_all_messages._steps.clear()
   handle_commands(message)
   return
- elif message.text.encode('utf-8') == "Назад":
+ elif message.text.encode() == "Назад":
   if len(repeat_all_messages._steps) >= 2:
    message.text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2]
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-1])
