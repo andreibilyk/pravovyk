@@ -30,7 +30,7 @@ def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
 
- if message.text == "Обрати сферу".decode('windows-1252'):
+ if message.text.decode('windows-1252') == "Обрати сферу":
   repeat_all_messages._steps.clear()
   handle_commands(message)
   return
