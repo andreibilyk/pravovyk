@@ -11,12 +11,12 @@ class SQLighter:
         """ Получаем одну строку с номером rownum """
         with self.connection:
             self.cursor.execute('SELECT * FROM user_interac WHERE id = %s' % str(rownum))
-            return self.cursor.fetchall()
+            return self.cursor.fetchall()[0]
 
     def select_row(self,answer):
         with self.connection:
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = '+"'"+str(answer)+"'")
-            return self.cursor.fetchall()
+            return self.cursor.fetchall()[0]
 
 
     def close(self):
