@@ -21,7 +21,7 @@ def handle_commands(message):
  db_worker = SQLighter()
  row = db_worker.select_single(1)
     # Формируем разметку
- markup = utils.generate_markup(row[1])
+ markup = utils.generate_markup(row[2])
  repeat_all_messages._steps = []
  bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
 
@@ -47,10 +47,10 @@ def repeat_all_messages(message):
  try:
   row = db_worker.select_row(message.text)
   log(message.text)
-  markup = utils.generate_markup(row[1])
+  markup = utils.generate_markup(row[2])
   markup.add("Обрати сферу","Назад")
   repeat_all_messages._steps.append(message.text)
-  bot.send_message(message.chat.id,row[0],reply_markup=markup)
+  bot.send_message(message.chat.id,row[1],reply_markup=markup)
  except BaseException:
   bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим")
 
