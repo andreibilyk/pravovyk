@@ -29,7 +29,7 @@ def handle_commands(message):
 def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
- if message.text.('utf-8') == "Обрати сферу":
+ if message.text.encode('utf-8') == "Обрати сферу":
   repeat_all_messages._steps.clear()
   handle_commands(message)
   return
@@ -43,7 +43,7 @@ def repeat_all_messages(message):
    handle_commands(message)
    return
  try:
-  row = db_worker.select_row(message.text.('utf-8'))
+  row = db_worker.select_row(message.text.encode('utf-8'))
   bot.send_message(message.chat.id,"Successful")
   markup = utils.generate_markup(row[2])
   markup.add("Обрати сферу","Назад")
