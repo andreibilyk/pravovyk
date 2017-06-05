@@ -29,14 +29,14 @@ def handle_commands(message):
 def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
-
- if message.text == u"Обрати сферу":
+ text = message.text.encode('utf-8')
+ if text == "Обрати сферу":
   repeat_all_messages._steps.clear()
   handle_commands(message)
   return
- elif message.text == u"Назад":
+ elif text == "Назад":
   if len(repeat_all_messages._steps) >= 2:
-   message.text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2].encode('utf-8')
+   text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2]
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-1])
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-2])
   elif len(repeat_all_messages._steps) < 2:
@@ -44,10 +44,10 @@ def repeat_all_messages(message):
    handle_commands(message)
    return
  try:
-  row = db_worker.select_row(message.text.encode('utf-8'))
+  row = db_worker.select_row(text)
   markup = utils.generate_markup(row[2])
   markup.add("Обрати сферу","Назад")
-  repeat_all_messages._steps.append(message.text)
+  repeat_all_messages._steps.append(text)
   bot.send_message(message.chat.id,row[1],reply_markup=markup)
  except BaseException as e:
   bot.send_message(message.chat.id,str(e)+"Вибачте,інформації ще нема,ми працюємо над цим")
