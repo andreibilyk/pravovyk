@@ -36,7 +36,7 @@ def repeat_all_messages(message):
   return
  elif message.text == u"Назад":
   if len(repeat_all_messages._steps) >= 2:
-   message.text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2]
+   message.text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2].encode('utf-8')
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-1])
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-2])
   elif len(repeat_all_messages._steps) < 2:
@@ -48,7 +48,6 @@ def repeat_all_messages(message):
   markup = utils.generate_markup(row[2])
   markup.add("Обрати сферу","Назад")
   repeat_all_messages._steps.append(message.text)
-  bot.send_message(message.chat.id,str(repeat_all_messages._steps[0].encode('utf-8')))
   bot.send_message(message.chat.id,row[1],reply_markup=markup)
  except BaseException as e:
   bot.send_message(message.chat.id,str(e)+"Вибачте,інформації ще нема,ми працюємо над цим")
