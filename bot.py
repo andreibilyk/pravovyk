@@ -60,7 +60,7 @@ def repeat_all_messages(message):
    bot.send_message(message.chat.id,row[1])
   try:
    file_id = db_worker.select_file(text)
-   bot.send_message(message.chat.id,file_id)
+   bot.send_document(message.chat.id,file_id)
   except Exception:
    pass
  except BaseException as e:
