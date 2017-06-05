@@ -51,17 +51,25 @@ def repeat_all_messages(message):
    return
  try:
   row = db_worker.select_row(text)
-  markup = utils.generate_markup(row[2])
-  markup.add("Обрати сферу","Назад")
-  repeat_all_messages._steps.append(text)
-  bot.send_message(message.chat.id,row[1],reply_markup=markup)
+  if row[2]:
+   markup = utils.generate_markup(row[2])
+   markup.add("Обрати сферу","Назад")
+   repeat_all_messages._steps.append(text)
+   bot.send_message(message.chat.id,row[1],reply_markup=markup)
+  else:
+   bot.send_message(message.chat.id,row[1])
+  try:
+   file_id = db_worker.select_file(text)
+   bot.send_message(message.chat.id,file_id)
+  except Exception:
+   pass
  except BaseException as e:
   bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим")
 
 @bot.message_handler(content_types=["document"])
 def audio_sent(message):
  bot.send_message(message.chat.id, message.document.file_id)
- 
+
 server = Flask(__name__)
 
 @server.route("/bot", methods=['POST'])

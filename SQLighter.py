@@ -18,7 +18,14 @@ class SQLighter:
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = '+"'"+str(answer)+"'")
             return self.cursor.fetchall()[0]
 
-
+    def select_file(self,answer):
+        with self.connection:
+            self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = '+"'"+str(answer)+"'")
+            info = self.cursor.fetchall()[0]
+            if info[7]:
+                return info[7]
+            else:
+                return 
     def close(self):
         """ Закрываем текущее соединение с БД """
         self.connection.close()
