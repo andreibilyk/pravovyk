@@ -31,8 +31,11 @@ def repeat_all_messages(message):
   repeat_all_messages._steps = []
  text = message.text.encode('utf-8')
  if text == "Обрати сферу":
-  repeat_all_messages._steps.clear()
-  handle_commands(message)
+  row = db_worker.select_single(1)
+     # Формируем разметку
+  markup = utils.generate_markup(row[2])
+  repeat_all_messages._steps = []
+  bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
   return
  elif text == "Назад":
   if len(repeat_all_messages._steps) >= 2:
@@ -40,8 +43,11 @@ def repeat_all_messages(message):
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-1])
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-2])
   elif len(repeat_all_messages._steps) < 2:
-   repeat_all_messages._steps.clear()
-   handle_commands(message)
+   row = db_worker.select_single(1)
+      # Формируем разметку
+   markup = utils.generate_markup(row[2])
+   repeat_all_messages._steps = []
+   bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
    return
  try:
   row = db_worker.select_row(text)
