@@ -56,7 +56,7 @@ def repeat_all_messages(message):
   repeat_all_messages._steps.append(text)
   bot.send_message(message.chat.id,row[1],reply_markup=markup)
  except BaseException as e:
-  bot.send_message(message.chat.id,str(e)+"Вибачте,інформації ще нема,ми працюємо над цим")
+  bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим")
 
 server = Flask(__name__)
 
