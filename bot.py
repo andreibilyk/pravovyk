@@ -57,6 +57,7 @@ def repeat_all_messages(message):
    repeat_all_messages._steps.append(text)
    bot.send_message(message.chat.id,row[1],reply_markup=markup)
   else:
+   bot.send_message(message.chat.id,"YEah")
    bot.send_message(message.chat.id,+row[1])
   try:
    file_id = db_worker.select_file(text)
