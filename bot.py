@@ -30,7 +30,7 @@ def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
  text = message.text.encode('utf-8')
- if text == "Обрати сферу📋"":
+ if text == "Обрати сферу📋":
   row = db_worker.select_single(1)
      # Формируем разметку
   markup = utils.generate_markup(row[2])
