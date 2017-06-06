@@ -53,7 +53,7 @@ def repeat_all_messages(message):
   row = db_worker.select_row(text)
   if row[2]:
    markup = utils.generate_markup(row[2])
-   markup.add("Обрати сферу","Назад")
+   markup.add("Обрати сферу📋","Назад🔙")
    repeat_all_messages._steps.append(text)
    bot.send_message(message.chat.id,row[1],reply_markup=markup)
   else:
