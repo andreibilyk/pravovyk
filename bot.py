@@ -30,14 +30,14 @@ def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
  text = message.text.encode('utf-8')
- if text == "Обрати сферу":
+ if text == "Обрати сферу📋"":
   row = db_worker.select_single(1)
      # Формируем разметку
   markup = utils.generate_markup(row[2])
   repeat_all_messages._steps = []
   bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
   return
- elif text == "Назад":
+ elif text == "Назад🔙":
   if len(repeat_all_messages._steps) >= 2:
    text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2]
    repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-1])
