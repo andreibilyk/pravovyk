@@ -70,7 +70,7 @@ def generate_markup(answers):
     for item in answers.split(','):
         list_items.append(item)
     # Хорошенько перемешаем все элементы
-    random.shuffle(list_items)
+    #random.shuffle(list_items)
     # Заполняем разметку перемешанными элементами
     for item in list_items:
         markup.add(item)
