@@ -30,8 +30,6 @@ def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
  text = message.text.encode('utf-8')
- bot.send_message(message.chat.id,''' <a href="tel:+380731681919"> Звоните нам бесплатно! </ a>''',parse_mode='HTML')
- bot.send_message(message.chat.id,'''<a href="www.pravovyk.com">https://pbs.twimg.com/profile_images/700243915325251584/6SSBl9ye.jpg</ a>''',parse_mode='HTML')
  if text == "Обрати сферу📋":
   row = db_worker.select_single(1)
      # Формируем разметку
