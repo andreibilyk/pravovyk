@@ -30,6 +30,7 @@ def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
  text = message.text.encode('utf-8')
+ bot.send_message(message.chat.id,'<b>Something new to say</b>\n <i>yeah,that is real mutherfucking talk</i>', parse_mode = 'HTML')
  if text == "Обрати сферу📋":
   row = db_worker.select_single(1)
      # Формируем разметку
