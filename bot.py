@@ -60,8 +60,9 @@ def repeat_all_messages(message):
    keyboard = types.InlineKeyboardMarkup()
    url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
    keyboard.add(url_button)
+   bot.send_sticker(chat_id,'AAQCABNLxOMNAATaPvbKYonrhLQyAAIC')
    bot.send_message(message.chat.id,row[1]+"<br> <b>Не знайшли відповідь?</b>",parse_mode='HTML',reply_markup = keyboard)
-   bot.send_photo(chat_id,'AAQCABNLxOMNAATaPvbKYonrhLQyAAIC')
+
   try:
    file_id = db_worker.select_file(text)
    bot.send_document(message.chat.id,file_id)
