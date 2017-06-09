@@ -61,6 +61,10 @@ def repeat_all_messages(message):
    url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
    keyboard.add(url_button)
    bot.send_message(message.chat.id,row[1]+"<br> <b>Не знайшли відповідь?</b>",parse_mode='HTML',reply_markup = keyboard)
+   bot.send_sticker(chat_id, "AAQCABNLxOMNAATaPvbKYonrhLQyAAIC")
+   keyboard = types.InlineKeyboardMarkup()
+   url_button = types.InlineKeyboardButton(text="Перейти на сайт", url="http://pravovyk.com")
+   bot.send_message(message.chat.id,reply_markup = keyboard)
   try:
    file_id = db_worker.select_file(text)
    bot.send_document(message.chat.id,file_id)
@@ -69,8 +73,8 @@ def repeat_all_messages(message):
  except BaseException as e:
   bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим")
 
-@bot.message_handler(content_types=["image"])
-def audio_sent(message):
+@bot.message_handler(content_types=["document"])
+def file_sent(message):
  bot.send_message(message.chat.id, message.document.file_id)
 
 server = Flask(__name__)
