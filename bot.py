@@ -69,7 +69,7 @@ def repeat_all_messages(message):
  except BaseException as e:
   bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим")
 
-@bot.message_handler(content_types=["document"])
+@bot.message_handler(content_types=["image"])
 def audio_sent(message):
  bot.send_message(message.chat.id, message.document.file_id)
 
