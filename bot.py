@@ -61,7 +61,7 @@ def repeat_all_messages(message):
    url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
    keyboard.add(url_button)
    bot.send_message(message.chat.id,row[1]+"<br> <b>Не знайшли відповідь?</b>",parse_mode='HTML',reply_markup = keyboard)
-   bot.send_photo(chat_id, "AAQCABNLxOMNAATaPvbKYonrhLQyAAIC")
+   bot.send_photo(chat_id, "CAADAgADbQADUa7ZSYT3ROTc0pqZAg")
   try:
    file_id = db_worker.select_file(text)
    bot.send_document(message.chat.id,file_id)
