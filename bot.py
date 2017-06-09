@@ -72,7 +72,7 @@ def repeat_all_messages(message):
 
 @bot.message_handler(content_types=["sticker"])
 def file_sent(message):
- bot.send_message(message.chat.id, message.document.file_id)
+ bot.send_message(message.chat.id, message.sticker.file_id)
 
 server = Flask(__name__)
 
