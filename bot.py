@@ -62,6 +62,10 @@ def repeat_all_messages(message):
    keyboard.add(url_button)
    bot.send_message(message.chat.id,row[1]+"<b>Не знайшли відповідь?</b>",parse_mode='HTML',reply_markup = keyboard)
    bot.send_sticker(message.chat.id,"CAADAgADwAEAAi9e9g_X8nwrz1fTFwI")
+   keyboard = types.InlineKeyboardMarkup()
+   url_button = types.InlineKeyboardButton(text="Перейти на веб-сайт", url="http://pravovyk.com")
+   keyboard.add(url_button)
+   bot.send_message(message.chat.id,reply_markup = keyboard)
   try:
    file_id = db_worker.select_file(text)
    bot.send_document(message.chat.id,file_id)
