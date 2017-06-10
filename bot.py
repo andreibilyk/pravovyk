@@ -72,7 +72,7 @@ def repeat_all_messages(message):
   except Exception:
    pass
  except BaseException as e:
-  bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим")
+  bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим!")
 
 @bot.message_handler(content_types=["sticker"])
 def file_sent(message):
