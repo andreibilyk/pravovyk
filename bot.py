@@ -118,8 +118,7 @@ def validate_mobile(value):
     rule = re.compile(r'^(?:\+?38)?[0]\d{9,11}$')
 
     if not rule.search(value):
-        msg = u"Invalid mobile number."
-        raise ValidationError(msg)
+        raise BaseException
 
 
 
