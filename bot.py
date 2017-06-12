@@ -110,8 +110,8 @@ def sms_verification(message):
   validate_mobile(message.text)
   bot.send_message(message.chat.id,"Success")
  except BaseException as e:
-  bot.send_message(message.chat.id,"Номер телефону введений некоректно. Спробуйте ще раз")
-
+  msg = bot.send_message(message.chat.id,"Номер телефону введений некоректно. Спробуйте ще раз")
+  bot.register_next_step_handler(msg, sms_verification)
 
 def validate_mobile(value):
 
