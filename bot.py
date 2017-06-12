@@ -120,11 +120,6 @@ def validate_mobile(value):
     if not rule.search(value):
         msg = u"Invalid mobile number."
         raise ValidationError(msg)
- '''try:
-  t = turbosmsua.Turbosms("bilyk.andrei","Bogatstvo88")
-  bot.send_message(message.chat.id,str(t.balance())
- except ValueError as e:
-  bot.send_message(message.chat.id,str(e))'''
 
 
 
