@@ -104,7 +104,7 @@ def callback_inline(call):
           return
 
 def sms_verification(message):
- number = randint(100000,999999)
+ number = str(randint(100000,999999))
  try:
   validate_mobile(message.text)
   bot.send_message(message.chat.id,"Success")
@@ -114,10 +114,10 @@ def sms_verification(message):
   return
  try:
   t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
-  #t.send_text("Msg",message.text,"Ваш код для верифікації: "+str(number))
+  #t.send_text("Msg",message.text,"Ваш код для верифікації: "+number)
   msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
   bot.register_next_step_handler(msg, number_verif)
-  user.setCode(str(number))
+  user.setCode(number)
  except BaseException as e:
   bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
 
