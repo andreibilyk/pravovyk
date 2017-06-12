@@ -6,8 +6,7 @@ class Turbosms:
 
     def __init__(self, login, password):
         self.client = Client('http://turbosms.in.ua/api/wsdl.html')
-        auth_result = self.client.service.Auth("bilyk_andrei","Bogatstvo88").encode('utf8')
-        print(login,password)
+        auth_result = self.client.service.Auth(login,password).encode('utf8')
         if auth_result != "Вы успешно авторизировались":
             raise ValueError("Auth error: %s" % auth_result)
 
@@ -24,7 +23,7 @@ class Turbosms:
     def send_text(self, sender, destinations, text, wappush=False):
         if not type(destinations) is list:
             destinations = [destinations]
-
+        print("1")
         def format_destination(d):
             d = str(d)
             if len(d) == 9:
@@ -38,9 +37,9 @@ class Turbosms:
             if len(d) == 13:
                 return d
             raise Exception("Invalid destination: %s" % d)
-
+        print("2")
         destinations_formated = ",".join(map(format_destination, destinations))
-
+        print("3")
         if not wappush:
             send_result = self.client.service.SendSMS(sender, destinations_formated, text.decode('utf8')).ResultArray
         else:
