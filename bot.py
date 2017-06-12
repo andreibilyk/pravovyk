@@ -8,7 +8,7 @@ from telebot import types
 from SQLighter import SQLighter
 import utils
 from random import randint
-#import turbosmsua
+import turbosmsua
 
 
 bot = telebot.TeleBot(config.token)
