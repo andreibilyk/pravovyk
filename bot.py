@@ -19,8 +19,8 @@ db_worker = SQLighter()
 def handle_commands(message):
 
  row = db_worker.select_single(1)
-    # Формируем разметку
  markup = utils.generate_markup(row[2])
+ markup.add("Ми в соц.мережах🤓🤳")
  repeat_all_messages._steps = []
  bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
 
@@ -49,6 +49,13 @@ def repeat_all_messages(message):
    repeat_all_messages._steps = []
    bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
    return
+ elif text == "Ми у соц.мережах🤓🤳":
+  keyboard = types.InlineKeyboardMarkup()
+  url_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
+  url_button = types.InlineKeyboardButton(text="Ми у Facebook", url="http://fb.me/pravovyk")
+  keyboard.add(url_button)
+  bot.send_message(message.chat.id,"Дізнавайтесь кожного дня новини у світі права📚 Слідкуйте за сім'єю Правовиків👨‍👩‍👧‍👦 та ситуації, у котрі потрапляють члени сім'ї, і з якими зіштовхується кожен з нас!😎'",reply_markup = keyboard)
+  return
  try:
   row = db_worker.select_row(text)
   if row[2]:
@@ -60,7 +67,8 @@ def repeat_all_messages(message):
    keyboard = types.InlineKeyboardMarkup()
    url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
    keyboard.add(url_button)
-   bot.send_message(message.chat.id,row[1]+"<b>Не знайшли відповідь?</b>",parse_mode='HTML',reply_markup = keyboard)
+   bot.send_message(message.chat.id,row[1]+'''
+   <b>Не знайшли відповідь?</b>''',parse_mode='HTML',reply_markup = keyboard)
    bot.send_sticker(message.chat.id,"CAADAgADwAEAAi9e9g_X8nwrz1fTFwI")
    keyboard = types.InlineKeyboardMarkup()
    url_button = types.InlineKeyboardButton(text="Перейти на веб-сайт", url="http://pravovyk.com")
