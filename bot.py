@@ -104,6 +104,10 @@ def callback_inline(call):
 def sms_verification(message):
  number = randint(100000,999999)
  bot.send_message(message.chat.id,number)
+ try:
+  t = turbosmsua.Turbosms("bilyk.andrei","Bogatstvo88")
+ except BaseException as e:
+  bot.send_message(message.chat.id,str(e))
  '''try:
   t = turbosmsua.Turbosms("bilyk.andrei","Bogatstvo88")
   bot.send_message(message.chat.id,str(t.balance())
