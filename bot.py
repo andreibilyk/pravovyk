@@ -10,6 +10,7 @@ import utils
 from random import randint
 import turbosmsua
 import re
+import sys
 
 bot = telebot.TeleBot(config.token)
 
