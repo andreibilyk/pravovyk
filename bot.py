@@ -9,7 +9,7 @@ from SQLighter import SQLighter
 import utils
 from random import randint
 import turbosmsua
-
+import re
 
 bot = telebot.TeleBot(config.token)
 
@@ -113,8 +113,7 @@ def sms_verification(message):
 
 
 def validate_mobile(value):
-    """ Raise a ValidationError if the value looks like a mobile telephone number.
-    """
+
     rule = re.compile(r'^(?:\+?38)?[0]\d{9,11}$')
 
     if not rule.search(value):
