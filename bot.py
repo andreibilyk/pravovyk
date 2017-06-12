@@ -51,9 +51,10 @@ def repeat_all_messages(message):
    return
  elif text == "Ми в соц.мережах🤓🤳":
   keyboard = types.InlineKeyboardMarkup()
-  url_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
-  url_button = types.InlineKeyboardButton(text="Ми у Facebook", url="http://fb.me/pravovyk")
-  keyboard.add(url_button)
+  instagram_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
+  facebook_button = types.InlineKeyboardButton(text="Ми у Facebook", url="http://fb.me/pravovyk")
+  keyboard.add(instagram_button)
+  keyboard.add(facebook_button)
   bot.send_message(message.chat.id,"Дізнавайтесь кожного дня новини у світі права📚 Слідкуйте за сім'єю Правовиків👨‍👩‍👧‍👦 та ситуації, у котрі потрапляють члени сім'ї, і з якими зіштовхується кожен з нас!😎'",reply_markup = keyboard)
   return
  try:
