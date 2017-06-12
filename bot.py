@@ -105,7 +105,7 @@ def sms_verification(message):
  number = randint(100000,999999)
  bot.send_message(message.chat.id,number)
  try:
-  t = turbosmsua.Turbosms("bilyk.andrei".encode("utf-8"),"Bogatstvo88".encode("utf-8"))
+  t = turbosmsua.Turbosms('bilyk.andrei','Bogatstvo88')
  except BaseException as e:
   bot.send_message(message.chat.id,str(e))
  '''try:
