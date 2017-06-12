@@ -105,13 +105,13 @@ def callback_inline(call):
 
 def sms_verification(message):
  number = randint(100000,999999)
-try:
- validate_mobile(message.text)
- bot.send_message(message.chat.id,"Success")
-except BaseException as e:
- msg = bot.send_message(message.chat.id,"Номер телефону введений некоректно. Спробуйте ще раз")
- bot.register_next_step_handler(msg, sms_verification)
- return
+ try:
+  validate_mobile(message.text)
+  bot.send_message(message.chat.id,"Success")
+ except BaseException as e:
+  msg = bot.send_message(message.chat.id,"Номер телефону введений некоректно. Спробуйте ще раз")
+  bot.register_next_step_handler(msg, sms_verification)
+  return
  try:
   t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
  except BaseException as e:
