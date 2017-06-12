@@ -102,7 +102,7 @@ def callback_inline(call):
           msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.",reply_markup = keyboard)
           bot.register_next_step_handler(msg, sms_verification)
 
-def process_name_step(message):
+def sms_verification(message):
  bot.send_message(message.chat.id,"We're here")
 
 
