@@ -23,7 +23,6 @@ class Turbosms:
     def send_text(self, sender, destinations, text, wappush=False):
         if not type(destinations) is list:
             destinations = [destinations]
-        print("1")
         def format_destination(d):
             d = str(d)
             if len(d) == 9:
@@ -37,9 +36,7 @@ class Turbosms:
             if len(d) == 13:
                 return d
             raise Exception("Invalid destination: %s" % d)
-        print("2")
         destinations_formated = ",".join(map(format_destination, destinations))
-        print("3")
         if not wappush:
             send_result = self.client.service.SendSMS(sender, destinations_formated, text.decode('utf8')).ResultArray
         else:
