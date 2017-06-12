@@ -100,6 +100,7 @@ def callback_inline(call):
           # поиск в базе
           msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.")
           bot.register_next_step_handler(msg, sms_verification)
+          return
 
 def sms_verification(message):
  number = randint(100000,999999)
