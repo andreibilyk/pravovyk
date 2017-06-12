@@ -103,6 +103,7 @@ def callback_inline(call):
 
 def sms_verification(message):
  number = randint(100000,999999)
+ print("here")
  bot.send_message(message.chat.id,number)
  try:
   t = turbosmsua.Turbosms('bilyk.andrei'.decode('utf-8'),'Bogatstvo88'.decode('utf-8'))
