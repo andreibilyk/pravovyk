@@ -101,7 +101,8 @@ def callback_inline(call):
           keyboard = types.InlineKeyboardMarkup()
           register_button = types.InlineKeyboardButton(text="Почати користуватись сервісом pravovyk.com😊", callback_data="register")
           login_button = types.InlineKeyboardButton(text="Вже у системі😎", callback_data="login")
-          keyboard.add(register_button,login_button)
+          keyboard.add(register_button)
+          keyboard.add(login_button)
           bot.send_message(call.message.chat.id,"Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com. Чи користувались Ви вже сервісом pravovyk.com?😇",reply_markup = keyboard)
 
 
