@@ -105,7 +105,7 @@ def sms_verification(message):
  number = randint(100000,999999)
  try:
   t = turbosmsua.Turbosms("bilyk.andrei","Bogatstvo88")
-  bot.send_message(message.chat.id,str(t.balance()))
+  bot.send_message(message.chat.id,str(t.balance())
  except ValueError as e:
   bot.send_message(message.chat.id,str(e))
 
