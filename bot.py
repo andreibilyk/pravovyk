@@ -98,12 +98,13 @@ def callback_inline(call):
     # Если сообщение из чата с ботом
     if call.message:
         if call.data == "start_but":
-          keyboard = types.InlineKeyboardMarkup()
-          register_button = types.InlineKeyboardButton(text="Почати користуватись сервісом pravovyk.com😊", callback_data="register")
-          login_button = types.InlineKeyboardButton(text="Вже у системі😎", callback_data="login")
-          keyboard.add(register_button)
-          keyboard.add(login_button)
-          bot.send_message(call.message.chat.id,"Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com. Чи користувались Ви вже сервісом pravovyk.com?😇",reply_markup = keyboard)
+          # поиск в базе
+          msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.",reply_markup = keyboard)
+          bot.register_next_step_handler(msg, sms_verification)
+
+def process_name_step(message):
+ bot.send_message(message.chat.id,"We're here")
+
 
 
 server = Flask(__name__)
