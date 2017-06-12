@@ -26,9 +26,9 @@ def handle_commands(message):
 
 
 #@bot.message_handler(func=lambda message: True, content_types=['text'])
-def repeat_all_messages(message):
- if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
-  repeat_all_messages._steps = []
+def main_messages(message):
+ if not hasattr(main_messages, '_steps'):  # инициализация значения
+  main_messages._steps = []
  text = message.text.encode('utf-8')
  if text == "Обрати сферу📋":
   row = db_worker.select_single(1)
@@ -36,19 +36,19 @@ def repeat_all_messages(message):
   markup = utils.generate_markup(row[2])
   markup.add("Ми в соц.мережах🤓🤳")
   markup.add("Поділитися з друзями👥")
-  repeat_all_messages._steps = []
+  main_messages._steps = []
   bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
   return
  elif text == "Назад🔙":
-  if len(repeat_all_messages._steps) >= 2:
-   text = repeat_all_messages._steps[len(repeat_all_messages._steps)-2]
-   repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-1])
-   repeat_all_messages._steps.remove(repeat_all_messages._steps[len(repeat_all_messages._steps)-2])
-  elif len(repeat_all_messages._steps) < 2:
+  if len(main_messages._steps) >= 2:
+   text = main_messages._steps[len(main_messages._steps)-2]
+   main_messages._steps.remove(main_messages._steps[len(main_messages._steps)-1])
+   main_messages._steps.remove(main_messages._steps[len(main_messages._steps)-2])
+  elif len(main_messages._steps) < 2:
    row = db_worker.select_single(1)
       # Формируем разметку
    markup = utils.generate_markup(row[2])
-   repeat_all_messages._steps = []
+   main_messages._steps = []
    bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
    return
  elif text == "Ми в соц.мережах🤓🤳":
@@ -69,7 +69,7 @@ def repeat_all_messages(message):
   if row[2]:
    markup = utils.generate_markup(row[2])
    markup.add("Обрати сферу📋","Назад🔙")
-   repeat_all_messages._steps.append(text)
+   main_messages._steps.append(text)
    bot.send_message(message.chat.id,row[1],reply_markup=markup)
   else:
    keyboard = types.InlineKeyboardMarkup()
@@ -140,7 +140,13 @@ def validate_mobile(value):
 
 def code_verif(message):
  if message.text.encode('utf-8') == user.code:
-  bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду?😃 Обери сферу:")
+  row = db_worker.select_single(1)
+       # Формируем разметку
+  markup = utils.generate_markup(row[2])
+  markup.add("Ми в соц.мережах🤓🤳")
+  markup.add("Поділитися з друзями👥")
+  msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду?😃 Обери сферу:")
+  bot.register_next_step_handler(msg,main_messages)
  else:
   keyboard = types.InlineKeyboardMarkup()
   starting_button = types.InlineKeyboardButton(text="Надіслати код ще раз", callback_data="code_one_more")
