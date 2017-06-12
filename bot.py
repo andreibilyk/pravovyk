@@ -116,7 +116,7 @@ def sms_verification(message):
   t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
   t.send_text("Msg",message.text,"Ваш код для верифікації: "+str(number))
   bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text)
-  bot.register_next_step_handler(msg, number_verif)
+  bot.register_next_step_handler(msg, number_verif(number = number))
  except BaseException as e:
   msg = bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
 
@@ -127,8 +127,8 @@ def validate_mobile(value):
     if not rule.search(value):
         raise BaseException
 
-def number_verif(message):
-
+def number_verif(message,number):
+ bot.send_message(message.chat.id,str(number))
 
 server = Flask(__name__)
 
