@@ -18,10 +18,8 @@ db_worker = SQLighter()
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
  keyboard = types.InlineKeyboardMarkup()
- register_button = types.InlineKeyboardButton(text="Бажаю почати користуватись сервісом pravovyk.com😊", callback_data="register")
- login_button = types.InlineKeyboardButton(text="Вже у системі😎", callback_data="login")
- keyboard.add(register_button)
- keyboard.add(login_button)
+ starting_button = types.InlineKeyboardButton(text="Розпочати😊", callback_data="start_but")
+ keyboard.add(starting_button)
  bot.send_message(message.chat.id,"Привіт🎉 Мене звати Pravovyk🤓Я був створений, щоб давати людям відповіді на правові питання😊Ціль мого існування - зробити твоє життя простішим і допомогти тобі з питаннями, з якими ти стикаєшся щодня😎👌🏿. Щоб знайти відповідь вибери сферу права з меню і дотримуйся інструкцій. Якщо ти не знайшов відповідь ти завжди можеш підключити оператора ,  який дасть кваліфіковану відповідь на твоє питання🙋🏼. Крім цього, ти можеш стежити за проектом в соц.мережах, а також на сайті. Сподіваюся, що я стану твоїм кишеньковим помічником, який виручить у потрібну хвилину😌✊🏻. Щоб розпочати спілкуватись зі мною натисни кнопку👇🏻",reply_markup = keyboard)
 
 
@@ -94,6 +92,18 @@ def repeat_all_messages(message):
 @bot.message_handler(content_types=["sticker"])
 def file_sent(message):
  bot.send_message(message.chat.id, message.sticker.file_id)
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    # Если сообщение из чата с ботом
+    if call.message:
+        if call.data == "start_but":
+          keyboard = types.InlineKeyboardMarkup()
+          register_button = types.InlineKeyboardButton(text="Почати користуватись сервісом pravovyk.com😊", callback_data="register")
+          login_button = types.InlineKeyboardButton(text="Вже у системі😎", callback_data="login")
+          keyboard.add(register_button,login_button)
+          bot.send_message(call.message.chat.id,"Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com. Чи користувались Ви вже сервісом pravovyk.com?😇",reply_markup = keyboard)
+
 
 server = Flask(__name__)
 
