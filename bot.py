@@ -95,11 +95,10 @@ def file_sent(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    # Если сообщение из чата с ботом
     if call.message:
         if call.data == "start_but":
           # поиск в базе
-          msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.",reply_markup = keyboard)
+          msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.")
           bot.register_next_step_handler(msg, sms_verification)
 
 def sms_verification(message):
