@@ -11,9 +11,9 @@ from random import randint
 import turbosmsua
 import re
 import sys
-
+from User import User
 bot = telebot.TeleBot(config.token)
-
+user = User()
 db_worker = SQLighter()
 
 @bot.message_handler(commands=['start'])
@@ -116,7 +116,8 @@ def sms_verification(message):
   t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
   #t.send_text("Msg",message.text,"Ваш код для верифікації: "+str(number))
   msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
-  bot.register_next_step_handler(msg, number_verif(number = number))
+  bot.register_next_step_handler(msg, number_verif)
+  user.setCode(str(number))
  except BaseException as e:
   bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
 
@@ -127,8 +128,8 @@ def validate_mobile(value):
     if not rule.search(value):
         raise BaseException
 
-def number_verif(message,number):
- bot.send_message(message.chat.id,str(number))
+def number_verif(message):
+ bot.send_message(message.chat.id,user.code)
 
 server = Flask(__name__)
 
