@@ -7,8 +7,8 @@ import logging
 from telebot import types
 from SQLighter import SQLighter
 import utils
-from random import randint
-import turbosmsua
+#from random import randint
+#import turbosmsua
 
 
 bot = telebot.TeleBot(config.token)
@@ -103,11 +103,11 @@ def callback_inline(call):
 
 def sms_verification(message):
  number = randint(100000,999999)
- try:
+ '''try:
   t = turbosmsua.Turbosms("bilyk.andrei","Bogatstvo88")
   bot.send_message(message.chat.id,str(t.balance())
  except ValueError as e:
-  bot.send_message(message.chat.id,str(e))
+  bot.send_message(message.chat.id,str(e))'''
 
 
 
