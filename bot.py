@@ -105,11 +105,21 @@ def callback_inline(call):
 def sms_verification(message):
  number = randint(100000,999999)
  try:
-  t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
+  #t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
+  validate_mobile(message.text)
   bot.send_message(message.chat.id,"Success")
  except BaseException as e:
   bot.send_message(message.chat.id,str(e))
 
+
+def validate_mobile(value):
+    """ Raise a ValidationError if the value looks like a mobile telephone number.
+    """
+    rule = re.compile(r'^(?:\+?38)?[0]\d{9,11}$')
+
+    if not rule.search(value):
+        msg = u"Invalid mobile number."
+        raise ValidationError(msg)
  '''try:
   t = turbosmsua.Turbosms("bilyk.andrei","Bogatstvo88")
   bot.send_message(message.chat.id,str(t.balance())
