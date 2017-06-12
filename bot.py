@@ -25,7 +25,7 @@ def handle_commands(message):
 
 
 
-@bot.message_handler(func=lambda message: True, content_types=['text'])
+#@bot.message_handler(func=lambda message: True, content_types=['text'])
 def repeat_all_messages(message):
  if not hasattr(repeat_all_messages, '_steps'):  # инициализация значения
   repeat_all_messages._steps = []
@@ -105,12 +105,17 @@ def callback_inline(call):
 
 def sms_verification(message):
  number = randint(100000,999999)
+try:
+ validate_mobile(message.text)
+ bot.send_message(message.chat.id,"Success")
+except BaseException as e:
+ msg = bot.send_message(message.chat.id,"Номер телефону введений некоректно. Спробуйте ще раз")
+ bot.register_next_step_handler(msg, sms_verification)
+ return
  try:
-  #t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
-  validate_mobile(message.text)
-  bot.send_message(message.chat.id,"Success")
+  t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
  except BaseException as e:
-  msg = bot.send_message(message.chat.id,"Номер телефону введений некоректно. Спробуйте ще раз")
+  msg = bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!")
   bot.register_next_step_handler(msg, sms_verification)
 
 def validate_mobile(value):
