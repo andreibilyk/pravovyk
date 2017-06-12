@@ -49,7 +49,7 @@ def repeat_all_messages(message):
    repeat_all_messages._steps = []
    bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
    return
- elif text == "Ми у соц.мережах🤓🤳":
+ elif text == "Ми в соц.мережах🤓🤳":
   keyboard = types.InlineKeyboardMarkup()
   url_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
   url_button = types.InlineKeyboardButton(text="Ми у Facebook", url="http://fb.me/pravovyk")
