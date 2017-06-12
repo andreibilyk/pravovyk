@@ -114,7 +114,7 @@ def sms_verification(message):
   return
  try:
   t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
-  t.send_text("sended",message.text,"Ваш код для верифікації: "+number)
+  t.send_text("Msg",message.text,"Ваш код для верифікації: "+str(number))
  except BaseException as e:
   msg = bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
 
