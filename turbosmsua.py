@@ -5,10 +5,9 @@ from suds.client import Client
 class Turbosms:
 
     def __init__(self, login, password):
-        print("hello")
         self.client = Client('http://turbosms.in.ua/api/wsdl.html')
         auth_result = self.client.service.Auth(login, password).encode('utf8')
-
+        print(login,passsword)
         if auth_result != "Вы успешно авторизировались":
             raise ValueError("Auth error: %s" % auth_result)
 
