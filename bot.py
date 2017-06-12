@@ -102,6 +102,15 @@ def callback_inline(call):
           msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.")
           bot.register_next_step_handler(msg, sms_verification)
           return
+        elif call.data == "code_one_more":
+            try:
+             number = str(randint(100000,999999))
+             t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
+             t.send_text("Msg",message.text,"Ваш код для верифікації: "+number)
+             msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
+             bot.register_next_step_handler(msg, code_verif)
+            except BaseException as e:
+             bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
 
 def sms_verification(message):
  number = str(randint(100000,999999))
@@ -114,10 +123,11 @@ def sms_verification(message):
   return
  try:
   t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
-  #t.send_text("Msg",message.text,"Ваш код для верифікації: "+number)
+  t.send_text("Msg",message.text,"Ваш код для верифікації: "+number)
   msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
-  bot.register_next_step_handler(msg, number_verif)
+  bot.register_next_step_handler(msg, code_verif)
   user.setCode(number)
+  user.setPhone(message.text)
  except BaseException as e:
   bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
 
@@ -128,8 +138,14 @@ def validate_mobile(value):
     if not rule.search(value):
         raise BaseException
 
-def number_verif(message):
- bot.send_message(message.chat.id,user.code)
+def code_verif(message):
+ if message.text.encode('utf-8') == user.code:
+  bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду?😃 Обери сферу:")
+ else:
+  keyboard = types.InlineKeyboardMarkup()
+  starting_button = types.InlineKeyboardButton(text="Надіслати код ще раз", callback_data="code_one_more")
+  keyboard.add(starting_button)
+  bot.send_message(message.chat.id,"Код верифікації - невірний🙈",reply_markup = keyboard)
 
 server = Flask(__name__)
 
