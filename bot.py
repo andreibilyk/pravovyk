@@ -101,7 +101,7 @@ def callback_inline(call):
     if call.message:
         if call.data == "start_but":
          user.verified = False
-         msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.")
+         msg = bot.send_message(call.message.chat.id,"Для верифікації,будь ласка, введіть Ваш мобільний телефон у текстове поле. Якщо Ви вперше користуєтесь сервісом pravovyk.com на Ваш номер телефону буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.")
          bot.register_next_step_handler(msg, sms_verification)
         elif call.data == "code_one_more":
             try:
@@ -122,19 +122,23 @@ def sms_verification(message):
   bot.register_next_step_handler(msg, sms_verification)
   return
  try:
-  s = db_worker.user_verified(message.text)
-  print(s)
- except BaseException as e:
-  bot.send_message(message.chat.id,str(e))
- try:
-  t = SMSer()
-  t.send_text(message.text.encode('utf-8'),"Ваш код для верифікації: %s " % number)
-  msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
-  bot.register_next_step_handler(msg, code_verif)
-  user.setCode(number)
+  db_worker.user_verified(message.text)
+  row = db_worker.select_single(1)
+       # Формируем разметку
+  markup = utils.generate_markup(row[2])
+  user.verified = True
   user.setPhone(message.text)
- except BaseException as e:
-  bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
+  msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
+ except BaseException:
+  try:
+   t = SMSer()
+   t.send_text(message.text.encode('utf-8'),"Ваш код для верифікації: %s " % number)
+   msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
+   bot.register_next_step_handler(msg, code_verif)
+   user.setCode(number)
+   user.setPhone(message.text)
+  except BaseException as e:
+   bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
 
 def validate_mobile(value):
 

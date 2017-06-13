@@ -28,13 +28,10 @@ class SQLighter:
                 return
     def user_verified(self,phone):
      with self.connection:
-         print("db")
-         self.cursor.execute('SELECT * FROM users WHERE phone_number = ' + "'"+phone+"'")
+         self.cursor.execute('SELECT * FROM users WHERE phone_number = ' + "'"+str(phone)+"'")
          info = self.cursor.fetchall()[0]
          if info:
              return True
-         else:
-             return False
 
     def user_verify(self,phone):
      with self.connection:
