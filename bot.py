@@ -101,10 +101,17 @@ def callback_inline(call):
     if call.message:
         if call.data == "start_but":
           # поиск в базе
-          user.verified = False
-          msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.")
-          bot.register_next_step_handler(msg, sms_verification)
-          return
+          if db_worker.user_verified == True:
+           row = db_worker.select_single(1)
+                # Формируем разметку
+           markup = utils.generate_markup(row[2])
+           user.verified = True
+           msg = bot.send_message(call.message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
+          else:
+           bot.register_next_step_handler(msg,main_messages)
+           user.verified = False
+           msg = bot.send_message(call.message.chat.id,"Ви ще не верифіковані у сервісі pravovyk.com. Будь ласка, введіть Ваш мобільний номер телефону, на нього буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.")
+           bot.register_next_step_handler(msg, sms_verification)
         elif call.data == "code_one_more":
             try:
              number = str(randint(100000,999999))
