@@ -8,10 +8,11 @@ from telebot import types
 from SQLighter import SQLighter
 import utils
 from random import randint
-import turbosmsua
+from smsclub import SMSer
 import re
 import sys
 from User import User
+
 bot = telebot.TeleBot(config.token)
 user = User()
 db_worker = SQLighter()
@@ -108,8 +109,8 @@ def callback_inline(call):
         elif call.data == "code_one_more":
             try:
              number = str(randint(100000,999999))
-             t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
-             t.send_text("Msg",message.text,"Ваш код для верифікації: "+number)
+             t = SMSer()
+             t.send_text(message.text,"Ваш код для верифікації: "+number)
              msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
              bot.register_next_step_handler(msg, code_verif)
             except BaseException as e:
@@ -124,8 +125,8 @@ def sms_verification(message):
   bot.register_next_step_handler(msg, sms_verification)
   return
  try:
-  t = turbosmsua.Turbosms('bilyk_andrei','Bogatstvo88')
-  t.send_text("Msg",message.text,"Ваш код для верифікації: "+number)
+  t = SMSer()
+  t.send_text(message.text,"Ваш код для верифікації: "+number)
   msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
   bot.register_next_step_handler(msg, code_verif)
   user.setCode(number)
