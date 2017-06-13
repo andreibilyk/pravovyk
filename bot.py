@@ -122,7 +122,7 @@ def sms_verification(message):
   bot.register_next_step_handler(msg, sms_verification)
   return
  try:
-  db_worker.user_verified(message.text)
+  db_worker.user_verified(message.text[-10:])
   row = db_worker.select_single(1)
        # Формируем разметку
   markup = utils.generate_markup(row[2])
@@ -154,7 +154,7 @@ def code_verif(message):
   markup = utils.generate_markup(row[2])
   user.verified = True
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
-  db_worker.user_verify(user.phone)
+  db_worker.user_verify(user.phone[-10:])
   bot.register_next_step_handler(msg,main_messages)
  else:
   keyboard = types.InlineKeyboardMarkup()
