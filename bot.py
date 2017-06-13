@@ -37,8 +37,6 @@ def main_messages(message):
    row = db_worker.select_single(1)
      # Формируем разметку
    markup = utils.generate_markup(row[2])
-   markup.add("Ми в соц.мережах🤓🤳")
-   markup.add("Поділитися з друзями👥")
    main_messages._steps = []
    bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
    return
@@ -149,8 +147,6 @@ def code_verif(message):
   row = db_worker.select_single(1)
        # Формируем разметку
   markup = utils.generate_markup(row[2])
-  markup.add("Ми в соц.мережах🤓🤳")
-  markup.add("Поділитися з друзями👥")
   user.verified = True
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
   bot.register_next_step_handler(msg,main_messages)
