@@ -25,7 +25,21 @@ class SQLighter:
             if info[7]:
                 return info[7]
             else:
-                return 
+                return
+    def user_verified(self,phone):
+     with self.connection:
+         self.cursor.execute('SELECT * FROM users WHERE phone_number = '+"'"+phone+"'" + ' AND verified = True')
+         info = self.cursor.fetchall()[0]
+         if info:
+             return True
+         else:
+             return False
+             
+    def user_verify(self,phone):
+     with self.connection:
+        self.cursor.execute('INSERT INTO users (phone_number,verified) VALUES (%s,True)'%phone)
+        self.connection.commit()
+
     def close(self):
         """ Закрываем текущее соединение с БД """
         self.connection.close()
