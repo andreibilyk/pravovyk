@@ -122,8 +122,9 @@ def sms_verification(message):
   bot.register_next_step_handler(msg, sms_verification)
   return
  try:
-  t = db_worker.user_verified(user.phone)
-  print(t)
+  print("here")
+  s = db_worker.user_verified(user.phone)
+  print(s)
  except BaseException as e:
   bot.send_message(message.chat.id,str(e))
  try:
