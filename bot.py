@@ -100,13 +100,6 @@ def file_sent(message):
 def callback_inline(call):
     if call.message:
         if call.data == "start_but":
-          # поиск в базе
-          '''if db_worker.user_verified(user.phone) == True:
-           row = db_worker.select_single(1)
-                # Формируем разметку
-           markup = utils.generate_markup(row[2])
-           user.verified = True
-           msg = bot.send_message(call.message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)'''
          try:
           t = db_worker.user_verified(user.phone)
           print(t)
