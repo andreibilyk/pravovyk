@@ -121,15 +121,14 @@ def sms_verification(message):
   msg = bot.send_message(message.chat.id,"Номер телефону введений некоректно. Спробуйте ще раз")
   bot.register_next_step_handler(msg, sms_verification)
   return
- try:
-  db_worker.user_verified(message.text[-10:])
+ if db_worker.user_verified(message.text[-10:]):
   row = db_worker.select_single(1)
        # Формируем разметку
   markup = utils.generate_markup(row[2])
   user.verified = True
   user.setPhone(message.text)
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
- except BaseException:
+ else:
   try:
    t = SMSer()
    t.send_text(message.text.encode('utf-8'),"Ваш код для верифікації: %s " % number)

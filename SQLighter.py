@@ -28,10 +28,11 @@ class SQLighter:
                 return
     def user_verified(self,phone):
      with self.connection:
-         self.cursor.execute('SELECT * FROM users WHERE phone_number = ' + "'"+str(phone)+"'")
-         info = self.cursor.fetchall()[0]
-         if info:
-             return True
+         try:
+          self.cursor.execute('SELECT * FROM users WHERE phone_number = ' + "'"+str(phone)+"'")
+         except BaseException:
+          return False
+         return True
 
     def user_verify(self,phone):
      with self.connection:
