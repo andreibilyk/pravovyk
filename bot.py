@@ -121,6 +121,7 @@ def sms_verification(message):
   msg = bot.send_message(message.chat.id,"Номер телефону введений некоректно. Спробуйте ще раз")
   bot.register_next_step_handler(msg, sms_verification)
   return
+ print(message.text[-10:])
  if db_worker.user_verified(message.text[-10:]):
   row = db_worker.select_single(1)
        # Формируем разметку
