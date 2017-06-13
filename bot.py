@@ -19,6 +19,7 @@ db_worker = SQLighter()
 
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
+ user.verified = False
  keyboard = types.InlineKeyboardMarkup()
  starting_button = types.InlineKeyboardButton(text="Розпочати😊", callback_data="start_but")
  keyboard.add(starting_button)
