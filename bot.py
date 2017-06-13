@@ -122,15 +122,13 @@ def sms_verification(message):
   bot.register_next_step_handler(msg, sms_verification)
   return
  try:
-  s = db_worker.user_verified(user.phone)
+  s = db_worker.user_verified(message.text)
   print(s)
  except BaseException as e:
   bot.send_message(message.chat.id,str(e))
  try:
   t = SMSer()
-  print("1")
   t.send_text(message.text.encode('utf-8'),"Ваш код для верифікації: %s " % number)
-  print("sent")
   msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
   bot.register_next_step_handler(msg, code_verif)
   user.setCode(number)
