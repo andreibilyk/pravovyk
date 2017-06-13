@@ -28,13 +28,13 @@ class SQLighter:
                 return
     def user_verified(self,phone):
      with self.connection:
-         self.cursor.execute('SELECT * FROM users WHERE phone_number = '+"'"+phone+"'" + ' AND verified = True')
+         self.cursor.execute('SELECT * FROM users WHERE phone_number = '+"'"+phone+"'")
          info = self.cursor.fetchall()[0]
          if info:
              return True
          else:
              return False
-             
+
     def user_verify(self,phone):
      with self.connection:
         self.cursor.execute('INSERT INTO users (phone_number,verified) VALUES (%s,True)'%phone)
