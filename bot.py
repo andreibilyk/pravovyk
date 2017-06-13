@@ -101,7 +101,7 @@ def callback_inline(call):
     if call.message:
         if call.data == "start_but":
           # поиск в базе
-          if db_worker.user_verified == True:
+          if db_worker.user_verified(user.phone) == True:
            row = db_worker.select_single(1)
                 # Формируем разметку
            markup = utils.generate_markup(row[2])
