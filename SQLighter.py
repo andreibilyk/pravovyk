@@ -30,6 +30,7 @@ class SQLighter:
      with self.connection:
          try:
           self.cursor.execute('SELECT * FROM users WHERE phone_number = ' + "'"+str(phone)+"'")
+          self.cursor.fetchall()[0]
          except BaseException:
           return False
          return True
