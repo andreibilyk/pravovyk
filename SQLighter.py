@@ -46,7 +46,7 @@ class SQLighter:
          return info[3]
     def setChatid(self,chat_id,phone):
      with self.connection:
-      self.cursor.execute('INSERT INTO users (chat_id) VALUES (%s) WHERE phone_number = %s'%(chat_id,phone))
+      self.cursor.execute('UPDATE users SET chat_id = %s WHERE phone_number = %s'%(chat_id,phone))
       self.connection.commit()
     def close(self):
         """ Закрываем текущее соединение с БД """
