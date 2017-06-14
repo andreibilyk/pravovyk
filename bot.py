@@ -14,7 +14,7 @@ import sys
 from User import User
 from google_measurement_protocol import PageView, report
 import uuid
-import http.client
+import httplib
 import urllib
 
 bot = telebot.TeleBot(config.token)
