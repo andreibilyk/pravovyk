@@ -63,7 +63,8 @@ def main_messages(message):
    conn = http.client.HTTPConnection("www.google-analytics.com")
    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=666&t=pageview&dh=bot.pravovyk.com&dp=/socials&dt=socials")
    response = conn.getresponse()
-   print response.status, response.reason
+   print (str(response.status))
+   print (str(response.reason))
    conn.close()
    keyboard = types.InlineKeyboardMarkup()
    instagram_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
