@@ -14,6 +14,7 @@ import sys
 from User import User
 from google_measurement_protocol import PageView, report
 import uuid
+import http.client, urllib
 
 bot = telebot.TeleBot(config.token)
 user = User()
@@ -58,6 +59,8 @@ def main_messages(message):
   elif text == "Ми в соц.мережах🤓🤳":
    view = PageView(path='/social-networks/', title='Pravovyk_bot', referrer='pravovyk.com')
    report('UA-100965704-1', uuid.uuid4(), view)
+   conn = http.client.HTTPConnection("www.google-analytics.com")
+   conn.request("POST", "/collect", "v=1&tid=UA-100965704-1&cid=666&t=pageview&dh=bot.pravovyk.com&dp=/socials&dt=socials")
    keyboard = types.InlineKeyboardMarkup()
    instagram_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
    facebook_button = types.InlineKeyboardButton(text="Ми у Facebook", url="http://fb.me/pravovyk")
