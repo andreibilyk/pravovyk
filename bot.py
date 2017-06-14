@@ -55,6 +55,8 @@ def main_messages(message):
     bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
     return
   elif text == "Ми в соц.мережах🤓🤳":
+   view = PageView(path='/social-networks/', title='Pravovyk_bot', referrer='pravovyk.com')
+   report('UA-100965704-1', user.chat_id, view)
    keyboard = types.InlineKeyboardMarkup()
    instagram_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
    facebook_button = types.InlineKeyboardButton(text="Ми у Facebook", url="http://fb.me/pravovyk")
@@ -130,6 +132,7 @@ def sms_verification(message):
   markup = utils.generate_markup(row[2])
   user.verified = True
   user.setPhone(message.text)
+  user.getChatid("'"+user.phone[-10:]+"'")
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
  else:
   try:
