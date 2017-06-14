@@ -58,13 +58,10 @@ def main_messages(message):
     bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
     return
   elif text == "Ми в соц.мережах🤓🤳":
-   view = PageView(path='/social-networks/', title='Pravovyk_bot', referrer='pravovyk.com')
-   report('UA-100965704-2', uuid.uuid4(), view)
+   #view = PageView(path='/social-networks/', title='Pravovyk_bot', referrer='pravovyk.com')
+   #report('UA-100965704-2', user.chat_id, view)
    conn = http.client.HTTPConnection("www.google-analytics.com")
-   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=666&t=pageview&dp=/socials")
-   response = conn.getresponse()
-   print (str(response.status))
-   print (str(response.reason))
+   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/socials"%user.chat_id)
    conn.close()
    keyboard = types.InlineKeyboardMarkup()
    instagram_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
@@ -74,6 +71,9 @@ def main_messages(message):
    bot.send_message(message.chat.id,"Слідкуйте за нами у соц.мережах, дізнавайтесь кожного дня новини у світі права📚 Слідкуйте за сім'єю Правовиків👨‍👩‍👧‍👦 та ситуації, у котрі потрапляють члени сім'ї, і з якими зіштовхується кожен з нас!😎'",reply_markup = keyboard)
    return
   elif text == "Поділитися з друзями👥":
+   conn = http.client.HTTPConnection("www.google-analytics.com")
+   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/share"%user.chat_id)
+   conn.close()
    keyboard = types.InlineKeyboardMarkup()
    switch_button = types.InlineKeyboardButton(text="Обрати друга", switch_inline_query="Кишеньковий бот-правовик🤓Натисни на моє ім'я, щоб розпочати бесіду зі мною☺️")
    keyboard.add(switch_button)
