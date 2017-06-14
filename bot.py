@@ -73,6 +73,9 @@ def main_messages(message):
   elif text == "Поділитися з друзями👥":
    conn = http.client.HTTPConnection("www.google-analytics.com")
    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/share"%user.chat_id)
+   response = conn.getresponse()
+   print(str(response.status))
+   print(str(response.reason))
    conn.close()
    keyboard = types.InlineKeyboardMarkup()
    switch_button = types.InlineKeyboardButton(text="Обрати друга", switch_inline_query="Кишеньковий бот-правовик🤓Натисни на моє ім'я, щоб розпочати бесіду зі мною☺️")
@@ -85,6 +88,10 @@ def main_messages(message):
     markup = utils.generate_markup(row[2])
     markup.add("Обрати сферу📋","Назад🔙")
     main_messages._steps.append(text)
+    conn = http.client.HTTPConnection("www.google-analytics.com")
+    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,text))
+    conn.close()
+
     bot.send_message(message.chat.id,row[1],reply_markup=markup)
    else:
     keyboard = types.InlineKeyboardMarkup()
