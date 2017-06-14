@@ -61,7 +61,7 @@ def main_messages(message):
    view = PageView(path='/social-networks/', title='Pravovyk_bot', referrer='pravovyk.com')
    report('UA-100965704-2', uuid.uuid4(), view)
    conn = http.client.HTTPConnection("www.google-analytics.com")
-   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=666&t=pageview&dh=bot.pravovyk.com&dp=/socials&dt=socials")
+   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=666&t=pageview&dp=/socials")
    response = conn.getresponse()
    print (str(response.status))
    print (str(response.reason))
