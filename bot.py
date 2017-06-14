@@ -12,6 +12,7 @@ from smsclub import SMSer
 import re
 import sys
 from User import User
+from google_measurement_protocol import PageView, report
 
 bot = telebot.TeleBot(config.token)
 user = User()
@@ -155,6 +156,8 @@ def code_verif(message):
   user.verified = True
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
   db_worker.user_verify("'"+user.phone[-10:]+"'")
+  user.setChatid(str(message.chat.id))
+  db_worker.setChatid(str(message.chat.id),"'"+user.phone[-10:]+"'")
   bot.register_next_step_handler(msg,main_messages)
  else:
   keyboard = types.InlineKeyboardMarkup()

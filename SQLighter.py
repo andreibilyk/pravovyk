@@ -39,7 +39,15 @@ class SQLighter:
      with self.connection:
         self.cursor.execute('INSERT INTO users (phone_number,verified) VALUES (%s,True)'%phone)
         self.connection.commit()
-
+    def getChatid(self,phone):
+     with self.connection:
+         self.cursor.execute('SELECT * FROM users WHERE phone_number = %s' % phone)
+         info = self.cursor.fetchall()[0]
+         return info[3]
+    def setChatid(self,chat_id,phone):
+     with self.connection:
+      self.cursor.execute('INSERT INTO users (chat_id) VALUES (%s) WHERE phone_number = %s'%(chat_id,phone))
+      self.connection.commit()
     def close(self):
         """ Закрываем текущее соединение с БД """
         self.connection.close()
