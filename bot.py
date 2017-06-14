@@ -132,7 +132,7 @@ def sms_verification(message):
   markup = utils.generate_markup(row[2])
   user.verified = True
   user.setPhone(message.text)
-  user.getChatid("'"+user.phone[-10:]+"'")
+  user.setChatid(db_worker.getChatid("'"+user.phone[-10:]+"'"))
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
  else:
   try:
