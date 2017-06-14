@@ -37,7 +37,7 @@ def main_messages(message):
  if user.verified == True:
   if not hasattr(main_messages, '_steps'):  # инициализация значения
    main_messages._steps = []
-  text = message.text.encode('utf-8')
+  text = message.text
   if text == "Обрати сферу📋":
    row = db_worker.select_single(1)
      # Формируем разметку
