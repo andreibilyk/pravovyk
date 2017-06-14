@@ -83,7 +83,7 @@ def main_messages(message):
    bot.send_message(message.chat.id,"Натисни кнопку та обери друзів, щоб поділитися з ними",reply_markup = keyboard)
    return
   try:
-   row = db_worker.select_row(text.encode('utf-8'))
+   row = db_worker.select_row(text)
    if row[2]:
     markup = utils.generate_markup(row[2])
     markup.add("Обрати сферу📋","Назад🔙")
