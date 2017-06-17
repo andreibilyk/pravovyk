@@ -13,9 +13,9 @@ from io import StringIO
 """
 class SMSer:
  def __init__(self):
-  self.login = '380731681919'  #string User ID (phone number)
-  self.alphaName = 'gsm1'    #string, sender id (alpha-name) (as long as your alpha-name is not spelled out, it is necessary to use it)
-  self.password = 'zs52s8k'
+  self.login = "380731681919"  #string User ID (phone number)
+  self.alphaName = "gsm1"    #string, sender id (alpha-name) (as long as your alpha-name is not spelled out, it is necessary to use it)
+  self.password = "zs52s8k"
 
  def send_text(self,abonent,text):
   print('here')
