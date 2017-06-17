@@ -22,10 +22,12 @@ class SMSer:
   print (text)
 
   xml = "<?xml version='1.0' encoding='utf-8'?><request_sendsms><username><![CDATA["+self.login+"]]></username><password><![CDATA["+self.password+"]]></password><from><![CDATA["+self.alphaName+"]]></from><to><![CDATA["+abonent.decode("utf-8")+"]]></to><text><![CDATA["+text+"]]></text></request_sendsms>"
+  print('here2')
   c = pycurl.Curl()
   c.setopt(c.URL, 'https://gate.smsclub.mobi/xml/')
   c.setopt(c.HTTPHEADER, ['Content-type: text/xml; charset=utf-8'])
   c.setopt(c.POSTFIELDS,xml)
   c.setopt(c.POST, 1)
+  print('here3')
   c.perform()
   c.close()
