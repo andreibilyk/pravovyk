@@ -19,7 +19,7 @@ class SQLighter:
             #print ('SELECT * FROM user_interac')
             #print ('SELECT * FROM user_interac WHERE user_answer = %s'% "'"+answer.decode('utf-8')+"'")
             #self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = %s '% "'"+ str(answer.decode('utf-8'))+"'")
-            self.cursor.execute('SELECT * FROM user_interac')
+            self.cursor.execute('''SELECT * FROM user_interac WHERE user_answer = 'Сімейне право👨‍👩‍👧‍👦' ''')
             print(self.cursor.fetchall())
             return self.cursor.fetchall()[0]
 
