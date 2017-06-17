@@ -15,7 +15,7 @@ class SQLighter:
 
     def select_row(self,answer):
         with self.connection:
-            print(answer.encode('utf-8').decode('latin-1'))
+            print(answer.decode('latin-1'))
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = %s'% answer.encode('utf-8').decode('latin-1'))
             return self.cursor.fetchall()[0]
 
