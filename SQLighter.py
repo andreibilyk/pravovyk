@@ -15,11 +15,8 @@ class SQLighter:
 
     def select_row(self,answer):
         with self.connection:
-            print('SELECT * FROM user_interac WHERE user_answer = %s '% answer)
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = %s '% answer)
-            s = self.cursor.fetchall()[0]
-            print(s)
-            return s
+            return self.cursor.fetchall()[0]
 
     def select_file(self,answer):
         with self.connection:
