@@ -21,7 +21,7 @@ class SMSer:
   print(abonent.decode('utf-8'))
   print (text)
 
-  xml = str("<?xml version='1.0' encoding='utf-8'?><request_sendsms><username><![CDATA["+self.login+"]]></username><password><![CDATA["+self.password+"]]></password><from><![CDATA["+self.alphaName+"]]></from><to><![CDATA["+abonent.decode("utf-8")+"]]></to><text><![CDATA["+text+"]]></text></request_sendsms>")
+  xml = str("<?xml version='1.0' encoding='utf-8'?><request_sendsms><username><![CDATA["+self.login+"]]></username><password><![CDATA["+self.password+"]]></password><from><![CDATA["+self.alphaName+"]]></from><to><![CDATA["+abonent.decode("utf-8")+"]]></to><text><![CDATA["+text+"]]></text></request_sendsms>").encode('utf-8')
   print('here2')
   c = pycurl.Curl()
   print('here3')
