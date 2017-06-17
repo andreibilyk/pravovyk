@@ -19,7 +19,7 @@ class SMSer:
 
  def send_text(self,abonent,text):
   print('here')
-  xml = "<?xml version='1.0' encoding='utf-8'?><request_sendsms><username><![CDATA["%s"]]></username><password><![CDATA["%s"]]></password><from><![CDATA["%s"]]></from><to><![CDATA["%s"]]></to><text><![CDATA["%s"]]></text></request_sendsms>" % (self.login,self.password,self.alphaName,abonent,text)
+  xml = "<?xml version='1.0' encoding='utf-8'?><request_sendsms><username><![CDATA["+self.login+"]]></username><password><![CDATA["+self.password+"]]></password><from><![CDATA["+self.alphaName+"]]></from><to><![CDATA["+abonent+"]]></to><text><![CDATA["+text+"]]></text></request_sendsms>"
   c = pycurl.Curl()
   c.setopt(c.URL, 'https://gate.smsclub.mobi/xml/')
   c.setopt(c.HTTPHEADER, ['Content-type: text/xml; charset=utf-8'])
