@@ -90,7 +90,7 @@ def main_messages(message):
     markup = utils.generate_markup(row[2])
     markup.add("Обрати сферу📋","Назад🔙")
     print('3')
-    main_messages._steps.append(text)
+    main_messages._steps.append(text.encode('utf-8'))
     conn = http.client.HTTPConnection("www.google-analytics.com")
     conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,text))
     conn.close()
