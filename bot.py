@@ -83,15 +83,17 @@ def main_messages(message):
    bot.send_message(message.chat.id,"Натисни кнопку та обери друзів, щоб поділитися з ними",reply_markup = keyboard)
    return
   try:
+   print("1")
    row = db_worker.select_row(text)
    if row[2]:
+    print("2")
     markup = utils.generate_markup(row[2])
     markup.add("Обрати сферу📋","Назад🔙")
     main_messages._steps.append(text)
     conn = http.client.HTTPConnection("www.google-analytics.com")
     conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,text))
     conn.close()
-
+    print("3")
     bot.send_message(message.chat.id,row[1],reply_markup=markup)
    else:
     keyboard = types.InlineKeyboardMarkup()
