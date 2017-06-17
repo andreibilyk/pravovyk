@@ -18,6 +18,7 @@ class SQLighter:
         with self.connection:
             print ("'"+ str(answer.decode('utf-8'))+"'")
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = %s '% "'"+ str(answer.decode('utf-8'))+"'")
+            print(self.cursor.fetchall())
             return self.cursor.fetchall()[0]
 
     def select_file(self,answer):
