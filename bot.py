@@ -84,7 +84,7 @@ def main_messages(message):
    return
   try:
    print("1")
-   row = db_worker.select_row(text)
+   row = db_worker.select_row("'"+text+"'")
    if row[2]:
     print("2")
     markup = utils.generate_markup(row[2])
