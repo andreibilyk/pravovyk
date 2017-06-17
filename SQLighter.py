@@ -16,7 +16,7 @@ class SQLighter:
     def select_row(self,answer):
         with self.connection:
             print(answer.encode('latin1').decode('utf8'))
-            self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = %s'% answer.encode('latin1').decode('utf8'))
+            self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = %s'% str(answer))
             return self.cursor.fetchall()[0]
 
     def select_file(self,answer):
