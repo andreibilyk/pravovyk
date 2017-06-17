@@ -156,8 +156,8 @@ def sms_verification(message):
  else:
   try:
    t = SMSer()
-   t.send_text(message.text,"Ваш код для верифікації: %s " % number)
-   msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text.encode('utf-8'))
+   t.send_text(message.text.encode('utf-8'),"Ваш код для верифікації: %s " % number)
+   msg = bot.send_message(message.chat.id,"Ваш код для верифікації надісланий на номер:"+message.text)
    bot.register_next_step_handler(msg, code_verif)
    user.setCode(number)
    user.setPhone(message.text)
