@@ -3,6 +3,7 @@ import config
 import os
 from flask import Flask, request
 import telebot
+import logging
 from telebot import types
 from SQLighter import SQLighter
 import utils
@@ -11,6 +12,8 @@ from smsclub import SMSer
 import re
 import sys
 from User import User
+from google_measurement_protocol import PageView, report
+import uuid
 import http.client
 import urllib
 from transliterate import translit, get_available_language_codes
@@ -56,8 +59,6 @@ def main_messages(message):
     bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
     return
   elif text == "Ми в соц.мережах🤓🤳":
-   #view = PageView(path='/social-networks/', title='Pravovyk_bot', referrer='pravovyk.com')
-   #report('UA-100965704-2', user.chat_id, view)
    conn = http.client.HTTPConnection("www.google-analytics.com")
    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/socials"%user.chat_id)
    conn.close()
@@ -90,7 +91,7 @@ def main_messages(message):
     print('3')
     main_messages._steps.append(text)
     conn = http.client.HTTPConnection("www.google-analytics.com")
-    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,text)
+    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,text.encode("utf-8")))
     conn.close()
     print("3")
     bot.send_message(message.chat.id,row[1],reply_markup=markup)
@@ -185,6 +186,7 @@ def code_verif(message):
   starting_button = types.InlineKeyboardButton(text="Надіслати код ще раз", callback_data="code_one_more")
   keyboard.add(starting_button)
   bot.send_message(message.chat.id,"Код верифікації - невірний🙈",reply_markup = keyboard)
+
 
 
 server = Flask(__name__)
