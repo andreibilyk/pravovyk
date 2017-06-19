@@ -91,7 +91,15 @@ def main_messages(message):
     print('3')
     main_messages._steps.append(text)
     conn = http.client.HTTPConnection("www.google-analytics.com")
-    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,translit(text, 'uk',reversed=True)))
+    emoji_pattern = re.compile("["
+            u"\U0001F600-\U0001F64F"  # emoticons
+            u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+            u"\U0001F680-\U0001F6FF"  # transport & map symbols
+            u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                               "]+", flags=re.UNICODE)
+    gog_text = emoji_pattern.sub(r'', text)
+    print(gog_text)
+    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,translit(gog_text, 'uk',reversed=True)))
     conn.close()
     print("3")
     bot.send_message(message.chat.id,row[1],reply_markup=markup)
