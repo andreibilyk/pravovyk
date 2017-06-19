@@ -91,7 +91,7 @@ def main_messages(message):
     print('3')
     main_messages._steps.append(text)
     conn = http.client.HTTPConnection("www.google-analytics.com")
-    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,text.encode("utf-8")))
+    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,translit(text, 'uk',reversed=True)))
     conn.close()
     print("3")
     bot.send_message(message.chat.id,row[1],reply_markup=markup)
