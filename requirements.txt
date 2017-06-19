@@ -27,7 +27,7 @@ pyTelegramBotAPI==3.0.1
 pytz==2017.2
 requests==2.17.3
 six==1.10.0
-suds==0.4
+suds-jurko==0.6
 suds-jurko==0.6
 tempora==1.7
 transliterate==1.9
