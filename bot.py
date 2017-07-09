@@ -97,6 +97,7 @@ def main_messages(message):
             u"\U0001F680-\U0001F6FF"  # transport & map symbols
             u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
             u"\u200d"
+            u"\u23f3"#⏳
                                "]+", flags=re.UNICODE)
     gog_text = emoji_pattern.sub(r'', text)
     print(gog_text)
