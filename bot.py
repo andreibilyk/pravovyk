@@ -102,6 +102,7 @@ def main_messages(message):
             u"\ufe0f"
             u"\u2699"#⚙️
             u"\U0001f913"
+            u"\u2640"#♀
                                "]+", flags=re.UNICODE)
     gog_text = emoji_pattern.sub(r'', text)
     print(gog_text)
