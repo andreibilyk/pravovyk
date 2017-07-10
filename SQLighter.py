@@ -41,7 +41,8 @@ class SQLighter:
           print(chat_id)
           self.cursor.execute('SELECT * FROM users WHERE chat_id = ' + "'"+chat_id+"'")
           self.cursor.fetchall()[0]
-         except BaseException:
+         except BaseException as e :
+          print(e)
           return False
          return True
 
