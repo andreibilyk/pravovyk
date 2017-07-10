@@ -36,7 +36,7 @@ def handle_commands(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def main_messages(message):
  if user.verified == False:
-  user1 = tb.get_me()
+  user1 = bot.get_me()
   print(user1.id)
 
  if user.verified == True:
