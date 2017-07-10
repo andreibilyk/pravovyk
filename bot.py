@@ -35,6 +35,7 @@ def handle_commands(message):
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def main_messages(message):
+ print(message)
  if user.verified == True:
   if not hasattr(main_messages, '_steps'):  # инициализация значения
    main_messages._steps = []
@@ -135,9 +136,6 @@ def main_messages(message):
 def sticker_sent(message):
  bot.send_message(message.chat.id, message.sticker.file_id)
 
-@bot.message_handler(content_types=["file"])
-def file_sent(message):
- bot.send_message(message.chat.id, message)
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     if call.message:
