@@ -37,7 +37,7 @@ def handle_commands(message):
 def main_messages(message):
  if user.verified == False:
   user1 = bot.get_me()
-  print(user1.id)
+  print(user1.username)
 
  if user.verified == True:
   if not hasattr(main_messages, '_steps'):  # инициализация значения
