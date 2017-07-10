@@ -63,7 +63,7 @@ def main_messages(message):
     return
   elif text == "Ми в соц.мережах🤓🤳":
    conn = http.client.HTTPConnection("www.google-analytics.com")
-   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/socials"%user.chat_id)
+   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/socials"%str(message.chat.id))
    conn.close()
    keyboard = types.InlineKeyboardMarkup()
    instagram_button = types.InlineKeyboardButton(text="Ми в Instagram", url="https://instagram.com/pravovyk")
@@ -74,7 +74,7 @@ def main_messages(message):
    return
   elif text == "Поділитися з друзями👥":
    conn = http.client.HTTPConnection("www.google-analytics.com")
-   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/share"%user.chat_id)
+   conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/share"%str(message.chat.id))
    response = conn.getresponse()
    print(str(response.status))
    print(str(response.reason))
@@ -110,7 +110,7 @@ def main_messages(message):
                                "]+", flags=re.UNICODE)
     gog_text = emoji_pattern.sub(r'', text)
     print(gog_text)
-    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(user.chat_id,translit(gog_text, 'uk',reversed=True)))
+    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(str(message.chat.id),translit(gog_text, 'uk',reversed=True)))
     conn.close()
     print("3")
     bot.send_message(message.chat.id,row[1],reply_markup=markup)
