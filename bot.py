@@ -136,6 +136,10 @@ def main_messages(message):
 def sticker_sent(message):
  bot.send_message(message.chat.id, message.sticker.file_id)
 
+@bot.message_handler(content_types=["photo"])
+def pdf_sent(message):
+ print(message)
+
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     if call.message:
