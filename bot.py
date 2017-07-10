@@ -216,6 +216,9 @@ def code_verif(message):
 
 
 server = Flask(__name__)
+server.run(threaded=True)
+
+
 
 @server.route("/bot", methods=['POST'])
 def getMessage():
