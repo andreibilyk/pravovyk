@@ -21,7 +21,6 @@ from transliterate import translit, get_available_language_codes
 bot = telebot.TeleBot(config.token)
 user = User()
 db_worker = SQLighter()
-session = True
 
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
@@ -140,7 +139,10 @@ def callback_inline(call):
     if call.message:
         if call.data == "start_but":
          user.verified = False
-         msg = bot.send_message(call.message.chat.id,"Для верифікації,будь ласка, введіть Ваш мобільний телефон у текстове поле. Якщо Ви вперше користуєтесь сервісом pravovyk.com на Ваш номер телефону буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.")
+         markup = types.ReplyKeyboardMarkup()
+         but = types.KeyboardButton('Number',request_contact=True)
+         markup.add(but)
+         msg = bot.send_message(call.message.chat.id,"Для верифікації,будь ласка, введіть Ваш мобільний телефон у текстове поле. Якщо Ви вперше користуєтесь сервісом pravovyk.com на Ваш номер телефону буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.",reply_markup=markup)
          bot.register_next_step_handler(msg, sms_verification)
         elif call.data == "code_one_more":
             try:
