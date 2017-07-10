@@ -140,7 +140,7 @@ def callback_inline(call):
         if call.data == "start_but":
          user.verified = False
          markup = types.ReplyKeyboardMarkup()
-         but = types.KeyboardButton('Number',request_contact=True)
+         but = types.KeyboardButton('Відправити свій номер📱',request_contact=True)
          markup.add(but)
          msg = bot.send_message(call.message.chat.id,"Для верифікації,будь ласка, введіть Ваш мобільний телефон у текстове поле. Якщо Ви вперше користуєтесь сервісом pravovyk.com на Ваш номер телефону буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.",reply_markup=markup)
          bot.register_next_step_handler(msg, sms_verification)
@@ -155,6 +155,7 @@ def callback_inline(call):
              bot.send_message(message.chat.id,"Вибачте, виникли технічні несправності, вибачте за незруучності!"+str(e))
 
 def sms_verification(message):
+ print(message)
  number = str(randint(100000,999999))
  try:
   validate_mobile(message.text)
