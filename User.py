@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import uuid
 class User:
-    def __init__(self,phone="",verified = False):
+    def __init__(self,phone="",verified = True):
      self.phone = phone
      self.verified = verified
     def setPhone(self, phone):

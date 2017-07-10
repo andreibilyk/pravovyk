@@ -21,6 +21,7 @@ from transliterate import translit, get_available_language_codes
 bot = telebot.TeleBot(config.token)
 user = User()
 db_worker = SQLighter()
+session = True
 
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
@@ -33,8 +34,9 @@ def handle_commands(message):
 
 
 
-#@bot.message_handler(func=lambda message: True, content_types=['text'])
+@bot.message_handler(func=lambda message: True, content_types=['text'])
 def main_messages(message):
+ if user.verified == True:
   if not hasattr(main_messages, '_steps'):  # инициализация значения
    main_messages._steps = []
   text = message.text
@@ -43,7 +45,7 @@ def main_messages(message):
      # Формируем разметку
    markup = utils.generate_markup(row[2])
    main_messages._steps = []
-   msg = bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
+   bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
    return
   elif text == "Назад🔙":
    if len(main_messages._steps) >= 2:
@@ -55,7 +57,7 @@ def main_messages(message):
       # Формируем разметку
     markup = utils.generate_markup(row[2])
     main_messages._steps = []
-    msg = bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
+    bot.send_message(message.chat.id,"Обери сферу",reply_markup=markup)
     return
   elif text == "Ми в соц.мережах🤓🤳":
    conn = http.client.HTTPConnection("www.google-analytics.com")
@@ -66,7 +68,7 @@ def main_messages(message):
    facebook_button = types.InlineKeyboardButton(text="Ми у Facebook", url="http://fb.me/pravovyk")
    keyboard.add(instagram_button)
    keyboard.add(facebook_button)
-   msg = bot.send_message(message.chat.id,"Слідкуйте за нами у соц.мережах, дізнавайтесь кожного дня новини у світі права📚 Слідкуйте за сім'єю Правовиків👨‍👩‍👧‍👦 та ситуації, у котрі потрапляють члени сім'ї, і з якими зіштовхується кожен з нас!😎'",reply_markup = keyboard)
+   bot.send_message(message.chat.id,"Слідкуйте за нами у соц.мережах, дізнавайтесь кожного дня новини у світі права📚 Слідкуйте за сім'єю Правовиків👨‍👩‍👧‍👦 та ситуації, у котрі потрапляють члени сім'ї, і з якими зіштовхується кожен з нас!😎'",reply_markup = keyboard)
    return
   elif text == "Поділитися з друзями👥":
    conn = http.client.HTTPConnection("www.google-analytics.com")
@@ -78,7 +80,7 @@ def main_messages(message):
    keyboard = types.InlineKeyboardMarkup()
    switch_button = types.InlineKeyboardButton(text="Обрати друга", switch_inline_query="Кишеньковий бот-правовик🤓Натисни на моє ім'я, щоб розпочати бесіду зі мною☺️")
    keyboard.add(switch_button)
-   msg = bot.send_message(message.chat.id,"Натисни кнопку та обери друзів, щоб поділитися з ними",reply_markup = keyboard)
+   bot.send_message(message.chat.id,"Натисни кнопку та обери друзів, щоб поділитися з ними",reply_markup = keyboard)
    return
   try:
    print("1")
@@ -109,27 +111,26 @@ def main_messages(message):
     conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(str(message.chat.id),translit(gog_text, 'uk',reversed=True)))
     conn.close()
     print("3")
-    msg = bot.send_message(message.chat.id,row[1],reply_markup=markup)
+    bot.send_message(message.chat.id,row[1],reply_markup=markup)
    else:
     keyboard = types.InlineKeyboardMarkup()
     url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
     keyboard.add(url_button)
-    msg = bot.send_message(message.chat.id,row[1]+'''
+    bot.send_message(message.chat.id,row[1]+'''
    <b>Не знайшли відповідь?</b>''',parse_mode='HTML',reply_markup = keyboard)
     bot.send_sticker(message.chat.id,"CAADAgADwgEAAi9e9g9yzglfrxXMpQI")
     keyboard = types.InlineKeyboardMarkup()
     url_button = types.InlineKeyboardButton(text="Перейти на веб-сайт", url="http://pravovyk.com")
     keyboard.add(url_button)
-    msg = bot.send_message(message.chat.id,"Дізнайтесь більше про нас😎",reply_markup = keyboard)
+    bot.send_message(message.chat.id,"Дізнайтесь більше про нас😎",reply_markup = keyboard)
    try:
     file_id = db_worker.select_file(text)
     bot.send_document(message.chat.id,file_id)
    except Exception:
     pass
   except BaseException as e:
-   msg = bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим!"+str(e))
-  bot.register_next_step_handler(msg, main_messages)
-#smth new
+   bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим!"+str(e))
+
 @bot.message_handler(content_types=["sticker"])
 def file_sent(message):
  bot.send_message(message.chat.id, message.sticker.file_id)
@@ -168,7 +169,6 @@ def sms_verification(message):
   user.setPhone(message.text)
   user.setChatid(db_worker.getChatid("'"+user.phone[-10:]+"'"))
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
-  bot.register_next_step_handler(msg, main_messages)
  else:
   try:
    t = SMSer()
