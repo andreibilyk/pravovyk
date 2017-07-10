@@ -36,7 +36,7 @@ def handle_commands(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def main_messages(message):
  if user.verified == False:
-  print(message.from.id)
+  print(message.user.id)
   if seekChatid(message.chat.id):
     user.verified = True
  if user.verified == True:
