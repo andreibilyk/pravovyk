@@ -216,7 +216,6 @@ def code_verif(message):
 
 
 server = Flask(__name__)
-server.run(threaded=True)
 
 
 
@@ -226,4 +225,4 @@ def getMessage():
     return "!", 200
 
 
-server.run(host="0.0.0.0", port=os.environ.get('PORT', 8443))
+server.run(host="0.0.0.0", port=os.environ.get('PORT', 8443),threaded=True)
