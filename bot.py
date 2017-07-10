@@ -33,7 +33,7 @@ def handle_commands(message):
 
 
 
-@bot.message_handler(func=lambda message: True, content_types=['text'])
+#@bot.message_handler(func=lambda message: True, content_types=['text'])
 def main_messages(message):
   if not hasattr(main_messages, '_steps'):  # инициализация значения
    main_messages._steps = []
@@ -167,6 +167,7 @@ def sms_verification(message):
   user.setPhone(message.text)
   user.setChatid(db_worker.getChatid("'"+user.phone[-10:]+"'"))
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
+  bot.register_next_step_handler(msg, main_messages)
  else:
   try:
    t = SMSer()
