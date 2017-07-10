@@ -35,6 +35,15 @@ class SQLighter:
           return False
          return True
 
+    def seekChatid(self,chat_id):
+     with self.connection:
+         try:
+          self.cursor.execute('SELECT * FROM users WHERE chat_id = %s' % chat_id)
+          self.cursor.fetchall()[0]
+         except BaseException:
+          return False
+         return True
+
     def user_verify(self,phone):
      with self.connection:
         self.cursor.execute('INSERT INTO users (phone_number,verified) VALUES (%s,True)'%phone)
