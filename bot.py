@@ -129,7 +129,7 @@ def main_messages(message):
   except BaseException as e:
    msg = bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим!"+str(e))
   bot.register_next_step_handler(msg, main_messages)
-
+#smth new
 @bot.message_handler(content_types=["sticker"])
 def file_sent(message):
  bot.send_message(message.chat.id, message.sticker.file_id)
