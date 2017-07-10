@@ -39,7 +39,7 @@ class SQLighter:
      with self.connection:
          try:
           print(chat_id)
-          self.cursor.execute('SELECT * FROM users WHERE chat_id = ' + "'"+chat_id+"'")
+          self.cursor.execute('SELECT * FROM users WHERE chat_id = ' + "'"+str(chat_id)+"'")
           self.cursor.fetchall()[0]
          except BaseException as e :
           print(e)
