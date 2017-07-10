@@ -38,6 +38,7 @@ class SQLighter:
     def seekChatid(self,chat_id):
      with self.connection:
          try:
+          print(chat_id)
           self.cursor.execute('SELECT * FROM users WHERE chat_id = %s' % chat_id)
           self.cursor.fetchall()[0]
          except BaseException:
