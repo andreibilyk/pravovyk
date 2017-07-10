@@ -136,7 +136,7 @@ def main_messages(message):
 def sticker_sent(message):
  bot.send_message(message.chat.id, message.sticker.file_id)
 
-@bot.message_handler(content_types=["photo"])
+@bot.message_handler(content_types=["document"])
 def pdf_sent(message):
  print(message)
 
