@@ -132,9 +132,12 @@ def main_messages(message):
    bot.send_message(message.chat.id,"Вибачте,інформації ще нема,ми працюємо над цим!"+str(e))
 
 @bot.message_handler(content_types=["sticker"])
-def file_sent(message):
+def sticker_sent(message):
  bot.send_message(message.chat.id, message.sticker.file_id)
 
+@bot.message_handler(content_types=["file"])
+def file_sent(message):
+ bot.send_message(message.chat.id, message)
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     if call.message:
