@@ -47,6 +47,7 @@ class SQLighter:
          return True
     def user_create(self,phone,name,last_name,chat_id):
         with self.connection:
+           print('INSERT INTO users (phone_number,first_name,last_name,chat_id) VALUES (%s,%s,%s,%s)'%(phone,name,last_name,chat_id))
            self.cursor.execute('INSERT INTO users (phone_number,first_name,last_name,chat_id) VALUES (%s,%s,%s,%s)'%(phone,name,last_name,chat_id))
            self.connection.commit()
     def close(self):

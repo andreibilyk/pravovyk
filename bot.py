@@ -61,9 +61,7 @@ def main_messages(message):
    bot.send_message(message.chat.id,"Натисни кнопку та обери друзів, щоб поділитися з ними",reply_markup = keyboard)
    return
   try:
-   print("here1")
    row = db_worker.select_row("'"+text+"'")
-   bot.send_message(message.chat.id,row[2]+row[1]+text)
    if row[2]:
     markup = utils.generate_markup(row[2])
     markup.add("Обрати сферу📋")
@@ -125,7 +123,7 @@ def contact_sent(message):
   markup = utils.generate_markup(row[2])
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
  except BaseException as e:
-    bot.send_message(message.chat.id,str(e)) 
+    print(e)
 
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
