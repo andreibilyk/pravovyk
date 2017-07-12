@@ -61,7 +61,9 @@ def main_messages(message):
    bot.send_message(message.chat.id,"Натисни кнопку та обери друзів, щоб поділитися з ними",reply_markup = keyboard)
    return
   try:
+   print("here1")
    row = db_worker.select_row("'"+text+"'")
+   print(row)
    if row[2]:
     markup = utils.generate_markup(row[2])
     markup.add("Обрати сферу📋")
