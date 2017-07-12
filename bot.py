@@ -63,7 +63,7 @@ def main_messages(message):
   try:
    print("here1")
    row = db_worker.select_row("'"+text+"'")
-   bot.send_message(message.chat.id,row)
+   bot.send_message(message.chat.id,row[2])
    if row[2]:
     markup = utils.generate_markup(row[2])
     markup.add("Обрати сферу📋")
