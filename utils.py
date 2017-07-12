@@ -74,4 +74,5 @@ def generate_markup(answers):
     # Заполняем разметку перемешанными элементами
     for item in list_items:
         markup.add(item)
+    print(markup)
     return markup
