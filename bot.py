@@ -118,11 +118,14 @@ def pdf_sent(message):
  print(message)
 @bot.message_handler(content_types=["contact"])
 def contact_sent(message):
- db_worker.user_create(message.contact.phone_number[-10:],message.from_user.first_name,message.from_user.last_name,str(message.chat.id))
- row = db_worker.select_single(1)
+ try:
+  db_worker.user_create(message.contact.phone_number[-10:],message.from_user.first_name,message.from_user.last_name,str(message.chat.id))
+  row = db_worker.select_single(1)
       # Формируем разметку
- markup = utils.generate_markup(row[2])
- msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
+  markup = utils.generate_markup(row[2])
+  msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
+ except BaseException as e:
+    bot.send_message(message.chat.id,str(e)) 
 
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
