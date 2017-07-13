@@ -15,7 +15,6 @@ class SQLighter:
 
     def select_row(self,answer):
         with self.connection:
-            print('db')
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = %s '% answer)
             return self.cursor.fetchall()[0]
 
