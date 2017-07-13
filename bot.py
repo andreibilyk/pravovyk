@@ -116,14 +116,13 @@ def pdf_sent(message):
  print(message)
 @bot.message_handler(content_types=["contact"])
 def contact_sent(message):
- try:
   db_worker.user_create(message.contact.phone_number[-10:],message.from_user.first_name,message.from_user.last_name,str(message.chat.id))
   row = db_worker.select_single(1)
       # Формируем разметку
   markup = utils.generate_markup(row[2])
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
 
-@bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
+@bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     if call.message:
         if call.data == "":
@@ -133,6 +132,7 @@ def callback_inline(call):
          markup.add(but)
          msg = bot.send_message(call.message.chat.id,"Для верифікації,будь ласка, натисніть кнопку, щоб надіслати свій номер телефону, або введіть його вручну у текстове поле. Якщо Ви вперше користуєтесь сервісом pravovyk.com на Ваш номер телефону буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.",reply_markup=markup)
          bot.register_next_step_handler(msg, sms_verification)
+
 
 
 
