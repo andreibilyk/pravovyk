@@ -69,9 +69,8 @@ def handle_commands(message):
 
 @bot.message_handler(commands=['new'])
 def new_command(message):
-{
-print('hi')
-}
+ print('hi')
+ 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def main_messages(message):
   text = message.text
