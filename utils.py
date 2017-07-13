@@ -10,6 +10,7 @@ def generate_markup(answers,callback):
     :param wrong_answers: Набор неправильных ответов
     :return: Объект кастомной клавиатуры
     """
+    print(callback)
     markup = types.InlineKeyboardMarkup()
     # Склеиваем правильный ответ с неправильными
     list_items = []
@@ -19,6 +20,6 @@ def generate_markup(answers,callback):
     #random.shuffle(list_items)
     # Заполняем разметку перемешанными элементами
     for item in list_items:
-        but = types.InlineKeyboardButton(text = item,callback_data = callback.add(item))
+        but = types.InlineKeyboardButton(text = item,callback_data = callback.append(item))
         markup.add(item)
     return markup
