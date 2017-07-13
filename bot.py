@@ -127,7 +127,10 @@ def contact_sent(message):
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
     if call.message:
-     row = db_worker.select_row("'"+call.data[-1]+"'")
+     print(call.data)
+     for item in answers.split(','):
+         list_items.append(item)
+     row = db_worker.select_row("'"+list_items[-1]+"'")
      if row[2]:
       markup = utils.generate_markup(row[2],call.data)
       bot.send_message(call.message.chat.id,row[1],reply_markup=markup)
