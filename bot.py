@@ -21,8 +21,8 @@ db_worker = SQLighter()
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
  print(str(message.chat.id))
- keyboard = types.ReplyKeyboardMarkup()
- starting_button = types.KeyboardButton(text="Поділитись номером телефону😊📲",request_contact=True)
+ keyboard = types.InlineKeyboardMarkup()
+ starting_button = types.InlineKeyboardButton(text="Поділитись номером телефону😊", callback_data="start_but",request_contact=True)
  keyboard.add(starting_button)
  bot.send_message(message.chat.id,"Привіт🎉 Мене звати Pravovyk🤓Я був створений, щоб давати людям відповіді на правові питання😊Ціль мого існування - зробити твоє життя простішим і допомогти тобі з питаннями, з якими ти стикаєшся щодня😎👌🏿. Щоб знайти відповідь вибери сферу права з меню і дотримуйся інструкцій. Якщо ти не знайшов відповідь ти завжди можеш підключити оператора ,  який дасть кваліфіковану відповідь на твоє питання🙋🏼. Крім цього, ти можеш стежити за проектом в соц.мережах, а також на сайті. Сподіваюся, що я стану твоїм кишеньковим помічником, який виручить у потрібну хвилину😌✊🏻. Щоб розпочати спілкуватись зі мною,будь ласка, поділися зі мною своїм номером мобільного телефона, що буде використовуватись для авторизації☺️",reply_markup = keyboard)
 
@@ -31,6 +31,7 @@ def handle_commands(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def main_messages(message):
   text = message.text
+
   if text == "Обрати сферу📋":
    row = db_worker.select_single(1)
      # Формируем разметку
@@ -63,8 +64,7 @@ def main_messages(message):
   try:
    row = db_worker.select_row("'"+text+"'")
    if row[2]:
-    markup = utils.generate_markup(row[2])
-    markup.add("Обрати сферу📋")
+    markup = utils.generate_markup(row[2],['main'])
     conn = http.client.HTTPConnection("www.google-analytics.com")
     emoji_pattern = re.compile("["
             u"\U0001F600-\U0001F64F"  # emoticons
@@ -116,22 +116,20 @@ def pdf_sent(message):
  print(message)
 @bot.message_handler(content_types=["contact"])
 def contact_sent(message):
-  db_worker.user_create(message.contact.phone_number[-10:],message.from_user.first_name,message.from_user.last_name,str(message.chat.id))
-  row = db_worker.select_single(1)
+ db_worker.user_create(message.contact.phone_number[-10:],message.from_user.first_name,message.from_user.last_name,str(message.chat.id))
+ row = db_worker.select_single(1)
       # Формируем разметку
-  markup = utils.generate_markup(row[2])
-  msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
+ markup = utils.generate_markup(row[2])
+ msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
 
-@bot.callback_query_handler(func=lambda call: True)
+@bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
     if call.message:
-        if call.data == "":
+     row = db_worker.select_row("'"+call.data[-1]+"'")
+     if row[2]:
+      markup = utils.generate_markup(row[2],call.data)
+      bot.send_message(call.message.chat.id,row[1],reply_markup=markup)
 
-         markup = types.ReplyKeyboardMarkup()
-         but = types.KeyboardButton('Відправити свій номер📱',request_contact=True)
-         markup.add(but)
-         msg = bot.send_message(call.message.chat.id,"Для верифікації,будь ласка, натисніть кнопку, щоб надіслати свій номер телефону, або введіть його вручну у текстове поле. Якщо Ви вперше користуєтесь сервісом pravovyk.com на Ваш номер телефону буде відправлений код верифікації.Кишеньковий помічник Pravovyk є безкоштовним продуктом сервісу pravovyk.com.",reply_markup=markup)
-         bot.register_next_step_handler(msg, sms_verification)
 
 
 
