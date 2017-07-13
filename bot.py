@@ -136,6 +136,7 @@ def callback_inline(call):
       print('row2')
       markup = utils.generate_markup(row[2],call.data)
       bot.send_message(call.message.chat.id,row[1],reply_markup=markup)
+      print('sent')
 
 
 
