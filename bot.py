@@ -124,6 +124,7 @@ def main_messages(message):
             u"\u2708"#✈️
             u"\u2695"#⚕
             u"\U0001F914"
+            u"\u2716"
                                "]+", flags=re.UNICODE)
     gog_text = emoji_pattern.sub(r'', text)
     print(gog_text)

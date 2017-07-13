@@ -48,6 +48,7 @@ def generate_markup(answers,callback):
             u"\u2708"#✈️
             u"\u2695"#⚕
             u"\U0001F914"
+            u"\u2716"
                                "]+", flags=re.UNICODE)
     markup = types.InlineKeyboardMarkup()
     # Склеиваем правильный ответ с неправильными
