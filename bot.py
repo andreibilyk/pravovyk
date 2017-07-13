@@ -121,19 +121,15 @@ def contact_sent(message):
  db_worker.user_create(message.contact.phone_number[-10:],message.from_user.first_name,message.from_user.last_name,str(message.chat.id))
  row = db_worker.select_single(1)
       # Формируем разметку
- markup = utils.generate_markup(row[2])
+ markup = utils.generate_markup_keyboard(row[2])
  msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
 
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
     if call.message:
      print(call.data)
-     print(call.data.split(',')[-1])
-     list_items = []
-     for item in call.data.split(','):
-         list_items.append(item)
      print(list_items[-1])
-     row = db_worker.select_row("'"+list_items[-1]+"'")
+     row = db_worker.select_row("'"+call.data.split(',')[-1]+"'")
      if row[2]:
       print('row2')
       markup = utils.generate_markup(row[2],call.data)
