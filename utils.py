@@ -48,6 +48,7 @@ def generate_markup(answers,callback):
          print(callback + item[:-(24-len(callback))])
          but = types.InlineKeyboardButton(text = item,callback_data = callback + str(i))
         else:
+         print("errorr rorrrrr")
          but = types.InlineKeyboardButton(text = item,callback_data = callback + item[:-(24-len(callback))])
         print(callback + str(i))
         markup.add(but)
