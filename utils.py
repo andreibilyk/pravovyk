@@ -32,6 +32,7 @@ def generate_markup(answers,callback):
     :param wrong_answers: Набор неправильных ответов
     :return: Объект кастомной клавиатуры
     """
+    callback = 'main'
     print(callback)
     markup = types.InlineKeyboardMarkup()
     # Склеиваем правильный ответ с неправильными
