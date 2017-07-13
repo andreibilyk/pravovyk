@@ -44,7 +44,11 @@ def generate_markup(answers,callback):
     i = 0
     for item in list_items:
         i += 1
-        but = types.InlineKeyboardButton(text = item,callback_data = callback + str(i))
+        if (len(callback + str(i)) != 3) and (callback + str(i) != '111') and (callback + str(i) != '112') and (callback + str(i) != '113') and (callback + str(i) != '264'):
+         print(callback + item[:-(24-len(callback))])
+         but = types.InlineKeyboardButton(text = item,callback_data = callback + str(i))
+        else:
+         but = types.InlineKeyboardButton(text = item,callback_data = callback + item[:-(24-len(callback))])
         print(callback + str(i))
         markup.add(but)
     if len(callback)>1:
