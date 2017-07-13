@@ -129,7 +129,7 @@ def contact_sent(message):
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
     if call.message:
-     print(call.data)
+     print(call.data.split(',')[-1])
      #print(list_items[-1])
      row = db_worker.select_row2(call.data.split(',')[-1])
      if row[2]:

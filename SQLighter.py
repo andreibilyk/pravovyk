@@ -29,6 +29,7 @@ class SQLighter:
     def select_row2(self,answer):
         with self.connection:
             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer LIKE %s ', answer)
+            print('SELECT * FROM user_interac WHERE user_answer LIKE %s ', answer)
             return self.cursor.fetchall()[0]
     def user_create(self,phone,name,last_name,chat_id):
         with self.connection:
