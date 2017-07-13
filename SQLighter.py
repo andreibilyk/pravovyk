@@ -33,7 +33,7 @@ class SQLighter:
              print('SELECT * FROM user_interac WHERE user_answer LIKE %s ', answer)
              return self.cursor.fetchall()[0]
             except BaseException as e:
-             print(str(e)
+             print(str(e))
              return
 
     def user_create(self,phone,name,last_name,chat_id):
