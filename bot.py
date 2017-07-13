@@ -191,8 +191,7 @@ def callback_inline(call):
       print('2')
       keyboard.add(url_button)
       print('3')
-      bot.send_message(message.chat.id,row[1]+'''
-      <b>Не знайшли відповідь?</b>''',parse_mode='HTML',reply_markup = keyboard)
+      bot.send_message(message.chat.id,row[1],reply_markup = keyboard)
       print('4')
       bot.send_sticker(message.chat.id,"CAADAgADwgEAAi9e9g9yzglfrxXMpQI")
       keyboard = types.InlineKeyboardMarkup()
