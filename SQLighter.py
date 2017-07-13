@@ -28,9 +28,14 @@ class SQLighter:
                 return
     def select_row2(self,answer):
         with self.connection:
-            self.cursor.execute('SELECT * FROM user_interac WHERE user_answer LIKE %s ', answer)
-            print('SELECT * FROM user_interac WHERE user_answer LIKE %s ', answer)
-            return self.cursor.fetchall()[0]
+            try:
+             self.cursor.execute('SELECT * FROM user_interac WHERE user_answer LIKE %s ', answer)
+             print('SELECT * FROM user_interac WHERE user_answer LIKE %s ', answer)
+             return self.cursor.fetchall()[0]
+            except BaseException as e:
+             print(str(e)
+             return
+
     def user_create(self,phone,name,last_name,chat_id):
         with self.connection:
            self.cursor.execute('INSERT INTO users (phone_number,first_name,last_name,chat_id) VALUES (%s,%s,%s,%s)',(phone,name,last_name,chat_id))
