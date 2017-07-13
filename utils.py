@@ -22,5 +22,6 @@ def generate_markup(answers,callback):
     for item in list_items:
         but = types.InlineKeyboardButton(text = item,callback_data = callback.append(item))
         print('2')
-        markup.add(item)
+        markup.add(but)
+        print('3')
     return markup
