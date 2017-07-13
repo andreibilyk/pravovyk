@@ -122,8 +122,6 @@ def contact_sent(message):
       # Формируем разметку
   markup = utils.generate_markup(row[2])
   msg = bot.send_message(message.chat.id,"Верифікація пройшла успішно😊Давай почнемо нашу бесіду!😃 Обери сферу:",reply_markup = markup)
- except BaseException as e:
-    print(e)
 
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
