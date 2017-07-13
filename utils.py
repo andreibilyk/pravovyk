@@ -64,8 +64,10 @@ def generate_markup(answers,callback):
          but = types.InlineKeyboardButton(text = item,callback_data = callback + str(i))
         else:
          if(len(item)<24):
+          print(emoji_pattern.sub(r'', item))
           but = types.InlineKeyboardButton(text = item,callback_data = emoji_pattern.sub(r'', item))
          else:
+          print(emoji_pattern.sub(r'', item))
           but =  types.InlineKeyboardButton(text = item,callback_data = emoji_pattern.sub(r'', item[:-24]))
         markup.add(but)
     if len(callback)>1:
