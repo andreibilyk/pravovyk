@@ -177,12 +177,14 @@ def callback_inline(call):
       print("not in dictionary")
       print(call.data)
       row = db_worker.select_row2("'%"+call.data+"%'")
+      print(row)
      if row[2]:
       print('row2')
       markup = utils.generate_markup(row[2],call.data)
       bot.send_message(call.message.chat.id,row[1], reply_markup = markup)
       print('sent')
      else:
+      print('answer')
       keyboard = types.InlineKeyboardMarkup()
       url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
       keyboard.add(url_button)
