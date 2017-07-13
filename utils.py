@@ -35,13 +35,14 @@ def generate_markup(answers,callback):
     markup = types.InlineKeyboardMarkup()
     # Склеиваем правильный ответ с неправильными
     list_items = []
+    callback = "main"
     for item in answers.split(','):
         list_items.append(item)
     # Хорошенько перемешаем все элементы
     #random.shuffle(list_items)
     # Заполняем разметку перемешанными элементами
     for item in list_items:
-        but = types.InlineKeyboardButton(text = item,callback_data = callback )
+        but = types.InlineKeyboardButton(text = item,callback_data = callback+","+item)
         print('2')
         markup.add(but)
         print('3')
