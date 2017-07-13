@@ -50,6 +50,7 @@ def generate_markup(answers,callback):
                 u"\u2019"
                 u"\u2708"#✈️
                 u"\u2695"#⚕
+                u"\U0001F914"
                                    "]+", flags=re.UNICODE)
     list_items = []
     for item in answers.split(','):
