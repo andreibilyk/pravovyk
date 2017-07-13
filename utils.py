@@ -20,7 +20,7 @@ def generate_markup(answers,callback):
     #random.shuffle(list_items)
     # Заполняем разметку перемешанными элементами
     for item in list_items:
-        but = types.InlineKeyboardButton(text = item,callback_data = 'yes')
+        but = types.InlineKeyboardButton(text = item,callback_data = callback + ","+item)
         print('2')
         markup.add(but)
         print('3')
