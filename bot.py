@@ -65,7 +65,7 @@ def main_messages(message):
    row = db_worker.select_row("'"+text+"'")
    if row[2]:
     print('1')
-    markup = utils.generate_markup(row[2])
+    markup = utils.generate_markup(row[2],'main')
     conn = http.client.HTTPConnection("www.google-analytics.com")
     emoji_pattern = re.compile("["
             u"\U0001F600-\U0001F64F"  # emoticons
