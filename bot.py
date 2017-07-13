@@ -59,7 +59,6 @@ spheres = {
 }
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
- print(str(message.chat.id))
  keyboard = types.ReplyKeyboardMarkup()
  starting_button = types.KeyboardButton(text="Поділитись номером телефону😊📲",request_contact=True)
  keyboard.add(starting_button)
@@ -97,8 +96,6 @@ def main_messages(message):
    conn = http.client.HTTPConnection("www.google-analytics.com")
    conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/share"%str(message.chat.id))
    response = conn.getresponse()
-   print(str(response.status))
-   print(str(response.reason))
    conn.close()
    keyboard = types.InlineKeyboardMarkup()
    switch_button = types.InlineKeyboardButton(text="Обрати друга", switch_inline_query="Кишеньковий бот-правовик🤓Натисни на моє ім'я, щоб розпочати бесіду зі мною☺️")
@@ -108,7 +105,6 @@ def main_messages(message):
   try:
    row = db_worker.select_row("'"+text+"'")
    if row[2]:
-    print('1')
     markup = utils.generate_markup(row[2],spheres[text])
     conn = http.client.HTTPConnection("www.google-analytics.com")
     emoji_pattern = re.compile("["
@@ -130,11 +126,8 @@ def main_messages(message):
             u"\u2716"
                                "]+", flags=re.UNICODE)
     gog_text = emoji_pattern.sub(r'', text)
-    print(gog_text)
     conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(str(message.chat.id),translit(gog_text, 'uk',reversed=True)))
     conn.close()
-    print("3")
-    print(markup)
     bot.send_message(message.chat.id,row[1],reply_markup=markup)
    else:
     keyboard = types.InlineKeyboardMarkup()
@@ -173,39 +166,29 @@ def contact_sent(message):
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
     if call.message:
-     print(call.data)
+
      #print(list_items[-1])
      if call.data in network:
+      print(network.get(call.data))
       row = db_worker.select_row("'"+network.get(call.data)+"'")
      else:
-      print("not in dictionary")
       print(call.data)
       row = db_worker.select_row2("'%"+call.data+"%'")
-      print(row)
      if row[2]:
-      print('row2')
       markup = utils.generate_markup(row[2],call.data)
       bot.send_message(call.message.chat.id,row[1], reply_markup = markup)
-      print('sent')
      else:
-      print('answer')
       keyboard = types.InlineKeyboardMarkup()
-      print('1')
       url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
-      print('2')
       keyboard.add(url_button)
-      print('3')
       bot.send_message(call.message.chat.id,row[1]+'''
       <b>Не знайшли відповідь?</b>''',parse_mode='HTML',reply_markup = keyboard)
-      print('4')
       bot.send_sticker(call.message.chat.id,"CAADAgADwgEAAi9e9g9yzglfrxXMpQI")
       keyboard = types.InlineKeyboardMarkup()
       url_button = types.InlineKeyboardButton(text="Перейти на веб-сайт", url="http://pravovyk.com")
       keyboard.add(url_button)
       bot.send_message(call.message.chat.id,"Дізнайтесь більше про нас😎",reply_markup = keyboard)
       if row[7]:
-       #file_id = db_worker.select_file(text)
-       print('file')
        bot.send_document(call.message.chat.id,row[7])
 
 
