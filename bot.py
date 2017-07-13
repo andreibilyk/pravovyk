@@ -130,7 +130,7 @@ def contact_sent(message):
 def callback_inline(call):
     if call.message:
      print(call.data)
-     print(list_items[-1])
+     #print(list_items[-1])
      row = db_worker.select_row("'"+call.data.split(',')[-1]+"'")
      if row[2]:
       print('row2')
