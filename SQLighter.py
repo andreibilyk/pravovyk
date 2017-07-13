@@ -20,34 +20,15 @@ class SQLighter:
 
     def select_file(self,answer):
         with self.connection:
-            self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = '+"'"+str(answer)+"'")
+            self.cursor.execute('SELECT * FROM user_interac WHERE user_answer = %s', str(answer))
             info = self.cursor.fetchall()[0]
             if info[7]:
                 return info[7]
             else:
                 return
-    def user_verified(self,phone):
-     with self.connection:
-         try:
-          self.cursor.execute('SELECT * FROM users WHERE phone_number = ' + "'"+str(phone)+"'")
-          self.cursor.fetchall()[0]
-         except BaseException:
-          return False
-         return True
 
-    def seekChatid(self,chat_id):
-     with self.connection:
-         try:
-          print(chat_id)
-          self.cursor.execute('SELECT * FROM users WHERE chat_id = ' + "'"+str(chat_id)+"'")
-          self.cursor.fetchall()[0]
-         except BaseException as e :
-          print(e)
-          return False
-         return True
     def user_create(self,phone,name,last_name,chat_id):
         with self.connection:
-           print('INSERT INTO users (phone_number,first_name,last_name,chat_id) VALUES (%s,%s,%s,%s)',(phone,name,last_name,chat_id))
            self.cursor.execute('INSERT INTO users (phone_number,first_name,last_name,chat_id) VALUES (%s,%s,%s,%s)',(phone,name,last_name,chat_id))
            self.connection.commit()
     def close(self):
