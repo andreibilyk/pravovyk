@@ -131,7 +131,7 @@ def callback_inline(call):
     if call.message:
      print(call.data)
      #print(list_items[-1])
-     row = db_worker.select_row("'"+call.data.split(',')[-1]+"'")
+     row = db_worker.select_row2(call.data.split(',')[-1])
      if row[2]:
       print('row2')
       markup = utils.generate_markup(row[2],call.data)
