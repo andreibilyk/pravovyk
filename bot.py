@@ -176,7 +176,7 @@ def callback_inline(call):
       row = db_worker.select_row("'"+network.get(call.data)+"'")
      else:
       print('Error')
-      row = db_worker.select_row("'"+call.message.text+"'")
+      row = db_worker.select_row("'"+'Право споживача🍞💇🏼‍♂️'+"'")
      if row[2]:
       print('row2')
       markup = utils.generate_markup(row[2],call.data)
