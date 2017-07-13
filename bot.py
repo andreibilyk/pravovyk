@@ -175,6 +175,7 @@ def callback_inline(call):
      try:
       row = db_worker.select_row("'"+network[call.data]+"'")
      except:
+      print('Error')
       row = db_worker.select_row("'"+call.message.text+"'")
      if row[2]:
       print('row2')
