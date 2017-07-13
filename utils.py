@@ -2,6 +2,7 @@
 from SQLighter import SQLighter
 from telebot import types
 import random
+import re
 
 def generate_markup_keyboard(answers):
     """
@@ -34,7 +35,7 @@ def generate_markup(answers,callback):
     print(callback)
     markup = types.InlineKeyboardMarkup()
     # Склеиваем правильный ответ с неправильными
-        emoji_pattern = re.compile("["
+    emoji_pattern = re.compile("["
                 u"\U0001F600-\U0001F64F"  # emoticons
                 u"\U0001F300-\U0001F5FF"  # symbols & pictographs
                 u"\U0001F680-\U0001F6FF"  # transport & map symbols
