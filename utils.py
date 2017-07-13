@@ -21,5 +21,6 @@ def generate_markup(answers,callback):
     # Заполняем разметку перемешанными элементами
     for item in list_items:
         but = types.InlineKeyboardButton(text = item,callback_data = callback.append(item))
+        print('2')
         markup.add(item)
     return markup
