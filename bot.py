@@ -75,7 +75,7 @@ def new_command(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def main_messages(message):
   text = message.text
-
+  print(message)
   if text == "Обрати сферу📋":
    row = db_worker.select_single(1)
      # Формируем разметку
@@ -207,8 +207,6 @@ def callback_inline(call):
        #file_id = db_worker.select_file(text)
        print('file')
        bot.send_document(call.message.chat.id,row[7])
-      except Exception:
-       pass
 
 
 
