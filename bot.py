@@ -172,7 +172,10 @@ def callback_inline(call):
      print(call.data)
      #print(list_items[-1])
      print(network[call.data])
-     row = db_worker.select_row("'"+network[call.data]+"'")
+     try:
+      row = db_worker.select_row("'"+network[call.data]+"'")
+     except:
+      row = db_worker.select_row("'"+call.message.text+"'")
      if row[2]:
       print('row2')
       markup = utils.generate_markup(row[2],call.data)
