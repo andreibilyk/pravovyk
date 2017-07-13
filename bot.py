@@ -128,6 +128,7 @@ def contact_sent(message):
 def callback_inline(call):
     if call.message:
      print(call.data)
+     list_items = []
      for item in call.data.split(','):
          list_items.append(item)
      print(list_items[-1])
