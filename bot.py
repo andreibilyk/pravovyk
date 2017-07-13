@@ -169,6 +169,7 @@ def contact_sent(message):
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
     if call.message:
+     print(call)
      print(call.data)
      #print(list_items[-1])
      if call.data in network:
