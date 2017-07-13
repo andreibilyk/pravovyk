@@ -24,4 +24,5 @@ def generate_markup(answers,callback):
         print('2')
         markup.add(but)
         print('3')
+    print(callback)
     return markup
