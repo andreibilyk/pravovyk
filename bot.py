@@ -191,16 +191,17 @@ def callback_inline(call):
       print('2')
       keyboard.add(url_button)
       print('3')
-      bot.send_message(message.chat.id,str(row[1]))
+      bot.send_message(call.message.chat.id,row[1]+'''
+      <b>Не знайшли відповідь?</b>''',parse_mode='HTML',reply_markup = keyboard)
       print('4')
-      bot.send_sticker(message.chat.id,"CAADAgADwgEAAi9e9g9yzglfrxXMpQI")
+      bot.send_sticker(call.message.chat.id,"CAADAgADwgEAAi9e9g9yzglfrxXMpQI")
       keyboard = types.InlineKeyboardMarkup()
       url_button = types.InlineKeyboardButton(text="Перейти на веб-сайт", url="http://pravovyk.com")
       keyboard.add(url_button)
-      bot.send_message(message.chat.id,"Дізнайтесь більше про нас😎",reply_markup = keyboard)
+      bot.send_message(call.message.chat.id,"Дізнайтесь більше про нас😎",reply_markup = keyboard)
       try:
        file_id = db_worker.select_file(text)
-       bot.send_document(message.chat.id,file_id)
+       bot.send_document(call.message.chat.id,file_id)
       except Exception:
        pass
 
