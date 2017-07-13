@@ -88,6 +88,7 @@ def main_messages(message):
     conn.request("POST", "/collect", "v=1&tid=UA-100965704-2&cid=%s&t=pageview&dp=/%s"%(str(message.chat.id),translit(gog_text, 'uk',reversed=True)))
     conn.close()
     print("3")
+    print(markup)
     bot.send_message(message.chat.id,row[1],reply_markup=markup)
    else:
     keyboard = types.InlineKeyboardMarkup()
