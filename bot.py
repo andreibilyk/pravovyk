@@ -17,7 +17,18 @@ from transliterate import translit, get_available_language_codes
 
 bot = telebot.TeleBot(config.token)
 db_worker = SQLighter()
-
+network = {"1": "Сімейне право👨‍👩‍👧‍👦",
+"11": 'Аліменти💰',
+"111": 'Розмір аліментів🤓📊',
+"112":'Заборгованість по аліментам😡⏳',
+"113": 'Звільнення від сплати🤔',
+"12":'Права батьків після розлучення👨‍👦👩‍👦',
+"13":'Розлучення💔🙇🏼',
+"14": 'Поділ майна🔪',
+"15": 'Усиновлення👼🏼',
+"16": 'Заповіт📜',
+"17": 'Спадок🔗',
+}
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
  print(str(message.chat.id))
@@ -67,7 +78,7 @@ def main_messages(message):
    row = db_worker.select_row("'"+text+"'")
    if row[2]:
     print('1')
-    markup = utils.generate_markup(row[2],'main')
+    markup = utils.generate_markup(row[2],'1')
     conn = http.client.HTTPConnection("www.google-analytics.com")
     emoji_pattern = re.compile("["
             u"\U0001F600-\U0001F64F"  # emoticons
@@ -130,9 +141,9 @@ def contact_sent(message):
 @bot.callback_query_handler(func=lambda call: True) #-----InlineKeyboardButton
 def callback_inline(call):
     if call.message:
-     print(call.data.split(',')[-1])
+     print(call.data)
      #print(list_items[-1])
-     row = db_worker.select_row2("'%"+call.data.split(',')[-1]+"%'")
+     row = db_worker.select_row(network[call.data])
      if row[2]:
       print('row2')
       markup = utils.generate_markup(row[2],call.data)
