@@ -47,5 +47,7 @@ def generate_markup(answers,callback):
         but = types.InlineKeyboardButton(text = item,callback_data = callback + str(i))
         print(callback + str(i))
         markup.add(but)
-
+    if len(callback)>1:
+     but = types.InlineKeyboardButton(text = "Назад🔙",callback_data = callback[:-1])
+     markup.add(but)
     return markup
