@@ -32,7 +32,23 @@ def generate_markup(answers,callback):
     :param wrong_answers: Набор неправильных ответов
     :return: Объект кастомной клавиатуры
     """
-    print(callback)
+    emoji_pattern = re.compile("["
+            u"\U0001F600-\U0001F64F"  # emoticons
+            u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+            u"\U0001F680-\U0001F6FF"  # transport & map symbols
+            u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+            u"\u200d"
+            u"\u23f3"#⏳
+            u"\u2642"#♂
+            u"\ufe0f"
+            u"\u2699"#⚙️
+            u"\U0001f913"
+            u"\u2640"#♀
+            u"\u2019"
+            u"\u2708"#✈️
+            u"\u2695"#⚕
+            u"\U0001F914"
+                               "]+", flags=re.UNICODE)
     markup = types.InlineKeyboardMarkup()
     # Склеиваем правильный ответ с неправильными
     list_items = []
@@ -45,12 +61,12 @@ def generate_markup(answers,callback):
     for item in list_items:
         i += 1
         if (len(callback + str(i)) <= 2) or (callback + str(i) == '111') or (callback + str(i) == '112') or (callback + str(i) == '113') or (callback + str(i) == '264'):
-         print(callback + item[:-(24-len(callback))])
          but = types.InlineKeyboardButton(text = item,callback_data = callback + str(i))
         else:
-         print("errorr rorrrrr")
-         but = types.InlineKeyboardButton(text = item,callback_data = callback + item[:-(24-len(callback))])
-        print(callback + str(i))
+         if(len(item)<24):
+          but = types.InlineKeyboardButton(text = item,callback_data = emoji_pattern.sub(r'', item))
+         else:
+          but =  types.InlineKeyboardButton(text = item,callback_data = emoji_pattern.sub(r'', item[:-24]))
         markup.add(but)
     if len(callback)>1:
      but = types.InlineKeyboardButton(text = "Назад🔙",callback_data = callback[:-1])

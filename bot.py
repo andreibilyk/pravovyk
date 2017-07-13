@@ -176,7 +176,7 @@ def callback_inline(call):
      else:
       print("not in dictionary")
       print(call.data)
-      row = db_worker.select_row("'"+call.message.text+"'")
+      row = db_worker.select_row2("'"+call.data+"'")
      if row[2]:
       print('row2')
       markup = utils.generate_markup(row[2],call.data)
