@@ -130,8 +130,10 @@ def callback_inline(call):
      print(call.data)
      for item in answers.split(','):
          list_items.append(item)
+     print(list_items[-1])
      row = db_worker.select_row("'"+list_items[-1]+"'")
      if row[2]:
+      print('row2')
       markup = utils.generate_markup(row[2],call.data)
       bot.send_message(call.message.chat.id,row[1],reply_markup=markup)
 
