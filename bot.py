@@ -171,7 +171,6 @@ def callback_inline(call):
     if call.message:
      print(call.data)
      #print(list_items[-1])
-     print(network[call.data])
      if call.data in network:
       row = db_worker.select_row("'"+network.get(call.data)+"'")
      else:
