@@ -186,10 +186,14 @@ def callback_inline(call):
      else:
       print('answer')
       keyboard = types.InlineKeyboardMarkup()
+      print('1')
       url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
+      print('2')
       keyboard.add(url_button)
+      print('3')
       bot.send_message(message.chat.id,row[1]+'''
       <b>Не знайшли відповідь?</b>''',parse_mode='HTML',reply_markup = keyboard)
+      print('4')
       bot.send_sticker(message.chat.id,"CAADAgADwgEAAi9e9g9yzglfrxXMpQI")
       keyboard = types.InlineKeyboardMarkup()
       url_button = types.InlineKeyboardButton(text="Перейти на веб-сайт", url="http://pravovyk.com")
