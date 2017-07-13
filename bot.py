@@ -143,6 +143,7 @@ def callback_inline(call):
     if call.message:
      print(call.data)
      #print(list_items[-1])
+     print(network[call.data])
      row = db_worker.select_row(network[call.data])
      if row[2]:
       print('row2')
