@@ -179,7 +179,7 @@ def callback_inline(call):
       bot.send_message(call.message.chat.id,row[1], reply_markup = markup)
      else:
       keyboard = types.InlineKeyboardMarkup()
-      url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/andrei_bilyk")
+      url_button = types.InlineKeyboardButton(text="Підключити оператора", url="https://t.me/test139899_bot")
       keyboard.add(url_button)
       bot.send_message(call.message.chat.id,row[1]+'''
       <b>Не знайшли відповідь?</b>''',parse_mode='HTML',reply_markup = keyboard)
