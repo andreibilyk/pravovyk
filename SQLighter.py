@@ -4,7 +4,7 @@ import logging
 class SQLighter:
 
     def __init__(self):
-        self.connection = psycopg2.connect("dbname='d43gotq6lmbhn3' user='viqqyucuojusmv' host='ec2-54-83-205-71.compute-1.amazonaws.com' password='cc1458772d0f7f750214b407228469a6c6f009d1bff544a0837cbc2771eee540'")
+        self.connection = psycopg2.connect("dbname='postgres' user='postgres' host='localhost:5432' password='readlnpassword'")
         self.cursor = self.connection.cursor()
 
     def select_single(self, rownum):
