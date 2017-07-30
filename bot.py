@@ -58,10 +58,6 @@ spheres = {
 'Поліція👮🏼🚨':'4',
 }
 
-@app.route('/', methods=['GET'])
-def verify():
- return "Hello world", 200
-
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
  keyboard = types.ReplyKeyboardMarkup()
@@ -202,7 +198,9 @@ def callback_inline(call):
 
 server = Flask(__name__)
 
-
+@server.route('/', methods=['GET'])
+def verify():
+ return "Hello world!"
 
 @server.route("/bot", methods=['POST'])
 def getMessage():
