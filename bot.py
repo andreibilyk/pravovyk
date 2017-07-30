@@ -57,6 +57,11 @@ spheres = {
 'Право споживача🍞💇🏼‍♂️':'3',
 'Поліція👮🏼🚨':'4',
 }
+
+@app.route('/', methods=['GET'])
+def verify():
+return "Hello world", 200
+
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
  keyboard = types.ReplyKeyboardMarkup()
