@@ -60,7 +60,7 @@ spheres = {
 
 @app.route('/', methods=['GET'])
 def verify():
-return "Hello world", 200
+ return "Hello world", 200
 
 @bot.message_handler(commands=['start'])
 def handle_commands(message):
